@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_10_024405) do
+ActiveRecord::Schema.define(version: 2018_09_10_072154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "episodes", force: :cascade do |t|
+    t.bigint "show_id"
+    t.string "url"
+    t.string "title"
+    t.string "duration", default: "00:00:00"
+    t.string "episode_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["show_id"], name: "index_episodes_on_show_id"
+  end
+
+  create_table "shows", force: :cascade do |t|
+    t.string "title"
+    t.string "small_title"
+    t.string "rss_url"
+    t.string "show_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shows_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "show_id", null: false
+    t.index ["user_id", "show_id"], name: "index_shows_users_on_user_id_and_show_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +53,5 @@ ActiveRecord::Schema.define(version: 2018_09_10_024405) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "episodes", "shows"
 end
