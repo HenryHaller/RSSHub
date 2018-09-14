@@ -1,0 +1,13 @@
+<div class="shows">
+  <% @shows.each do |show| %>
+  <div class="show-div">
+    <% unless show.title %> This show has no title<% end %>
+    <%= link_to "Delete", show_path(show), method: :delete %>
+  </div>
+  <% end %>
+</div>
+
+<%= simple_form_for @show do |f| %>
+<%= f.input :rss_url %>
+<%= f.submit %>
+<% end %>

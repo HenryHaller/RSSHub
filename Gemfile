@@ -17,6 +17,8 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
+gem 'simple_form'
+
 gem 'active_model_serializers', '~> 0.10.0'
 
 
