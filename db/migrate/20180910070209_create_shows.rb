@@ -5,6 +5,7 @@ class CreateShows < ActiveRecord::Migration[5.2]
       t.string :small_title
       t.string :rss_url
       t.string :show_img
+      t.text :data
 
       t.timestamps
     end
