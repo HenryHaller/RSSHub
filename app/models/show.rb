@@ -2,7 +2,7 @@ require "open-uri"
 require "rss"
 
 class Show < ApplicationRecord
-  after_create :update_episodes, :set_self_metadata
+  after_create :get_show_data, :update_episodes, :set_self_metadata
   has_many :episodes
   has_and_belongs_to_many :users
 
@@ -24,7 +24,6 @@ class Show < ApplicationRecord
   end
 
   def update_episodes
-    self.get_show_data if Time.now() - self.updated_at > 1.hours
     puts "updating past episodes for #{self.title}" if self.title
     feed = get_feed
     feed.items.each do |episode|
@@ -47,6 +46,7 @@ class Show < ApplicationRecord
 
   private
   def get_feed
+    self.get_show_data if Time.now() - self.updated_at > 1.hours
     RSS::Parser.parse(self.data)
   end
 end

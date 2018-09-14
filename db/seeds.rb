@@ -14,7 +14,7 @@ Episode.destroy_all
 
 puts 'creating one user'
 henry = User.new(
-  email: "henry@gmail.com",
+  email: "test_user@henryhaller.website",
   password: "123456"
   )
 puts henry.errors.messages unless henry.save
