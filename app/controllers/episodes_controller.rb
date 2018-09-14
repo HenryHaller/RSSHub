@@ -1,5 +1,9 @@
 class EpisodesController < ApplicationController
   def index
-    render json: current_user.episodes
+    @episodes = current_user.episodes
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @episodes }
+    end
   end
 end
