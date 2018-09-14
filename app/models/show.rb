@@ -23,6 +23,26 @@ class Show < ApplicationRecord
     self.save
   end
 
+  def update_episodes_with_mailer
+    feed = get_feed
+    feed.items.each do |episode|
+      ep = Episode.new(
+        title: episode.title,
+        url: episode.enclosure.url,
+        duration: episode.enclosure.length,
+        show: self
+        )
+      unless ep.save
+        puts ep.errors.messages
+        break
+      else
+        self.users.each do |user|
+          NewEpisodeMailer.with(user: user, episode: ep).new_episode_email.deliver_now
+        end
+      end
+    end
+  end
+
   def update_episodes
     puts "updating past episodes for #{self.title}" if self.title
     feed = get_feed
