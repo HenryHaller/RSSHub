@@ -35,6 +35,7 @@ class Show < ApplicationRecord
         )
       unless ep.save
         puts ep.errors.messages
+        puts ep.title
         break
       else
         unless first_run # if this us first run then we don't want to be sending out emails
