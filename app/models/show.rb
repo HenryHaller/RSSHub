@@ -20,7 +20,7 @@ class Show < ApplicationRecord
     end
     feed = get_feed
     self.title = feed.channel.title
-    self.show_img = feed.channel.image.url
+    self.show_img = feed.channel.image.url if feed.channel.image
     self.save
   end
 

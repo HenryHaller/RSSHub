@@ -11,7 +11,9 @@
           <% if episode.episode_img %>
           <%= image_tag(episode.episode_img) %>
           <% else %>
+          <% if episode.show.show_img %>
           <%= image_tag(episode.show.show_img, style: "width: 64px") %>
+          <% end %>
           <% end %>
         </div>
         <% end %>
