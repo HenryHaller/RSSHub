@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'deleting all users, shows and episodes'
-User.destroy_all
-Show.destroy_all
 Episode.destroy_all
+Show.destroy_all
+User.destroy_all
 
 
 puts 'creating one user'
