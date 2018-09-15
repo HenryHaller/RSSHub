@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_09_10_072154) do
     t.string "title"
     t.integer "duration"
     t.string "episode_img"
+    t.text "description"
+    t.datetime "pub_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["show_id"], name: "index_episodes_on_show_id"

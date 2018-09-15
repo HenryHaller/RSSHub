@@ -31,6 +31,8 @@ class Show < ApplicationRecord
         title: episode.title,
         url: episode.enclosure.url,
         duration: episode.enclosure.length,
+        description: episode.description,
+        pub_date: episode.pubDate,
         show: self
         )
       unless ep.save
@@ -53,7 +55,6 @@ class Show < ApplicationRecord
     "#{self.title}, #{self.episodes.length} Episodes, #{self.rss_url}"
   end
 
-  private
   def get_feed
     self.get_show_data if Time.now() - self.updated_at > 1.hours
     RSS::Parser.parse(self.data)
