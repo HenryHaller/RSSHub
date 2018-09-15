@@ -1,10 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-sm-8">
       <h4 class="text-center">Episodes</h4>
-      <% 20.times do |iteration| %>
       <div class="episodes">
+        <% 20.times do |iteration| %>
         <% episode = @episodes[iteration] %>
+        <% if episode %>
         <div class="episode">
           <%= link_to episode.title, episode.url %>
           <% if episode.episode_img %>
@@ -13,8 +14,26 @@
           <%= image_tag(episode.show.show_img, style: "width: 64px") %>
           <% end %>
         </div>
+        <% end %>
+        <% end %>
       </div >
-      <% end %>
     </div>
+
+    <div class="col-xs-12 col-sm-4">
+      <div id="manage_shows">
+        <h4 class="text-center">Manage Shows</h4>
+        <% @shows.each do |show| %>
+        <div class="show-div">
+          <%= show.title %>
+          <%= link_to "Delete", show_path(show), method: :delete %>
+        </div>
+        <% end %>
+        <%= simple_form_for @show do |f| %>
+        <%= f.input :rss_url %>
+        <%= f.submit %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

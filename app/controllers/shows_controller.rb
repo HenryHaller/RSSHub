@@ -8,9 +8,9 @@ class ShowsController < ApplicationController
     show = Show.new(show_params)
     if show.save
     current_user.shows << show
-      redirect_to shows_path
+      redirect_to episodes_path
     else
-      render :index
+      render "episodes/index"
     end
   end
 
@@ -24,7 +24,7 @@ class ShowsController < ApplicationController
 
   def destroy
     @show.destroy
-    redirect_to shows_path
+    redirect_to episodes_path
   end
 
   private
