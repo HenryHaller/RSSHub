@@ -37,8 +37,8 @@ class Show < ApplicationRecord
         puts ep.errors.messages
         break
       else
-        if first_run
-          puts "first run is true"
+        unless first_run # if this us first run then we don't want to be sending out emails
+          puts "first run is false"
           # self.users.each do |user|
           #   puts "sending email to #{user}"
           #   NewEpisodeMailer.with(user: user, episode: ep).new_episode_email.deliver_now
