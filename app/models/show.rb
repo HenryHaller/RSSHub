@@ -3,6 +3,7 @@ require "rss"
 
 class Show < ApplicationRecord
   after_create :get_show_data, :update_episodes, :set_self_metadata
+  validates :rss_url, url: { no_local: true, schemes: ['https', 'http']  }
   has_many :episodes
   has_and_belongs_to_many :users
 
