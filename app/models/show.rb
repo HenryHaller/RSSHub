@@ -8,14 +8,14 @@ class Show < ApplicationRecord
   has_and_belongs_to_many :users
 
   def get_show_data
-    puts "retreiving show data for #{self.title}"
+    puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}"
     begin
-    self.data = open(self.rss_url).read
-    self.save
+      self.data = open(self.rss_url).read
     rescue Errno::ECONNREFUSED => e
       puts e.message
     end
   end
+
 
   def set_self_metadata
     if self.title
@@ -81,18 +81,17 @@ class Show < ApplicationRecord
         self.get_feed.class
       rescue TypeError => e
         $stderr.puts "Caught the exception: #{e}"
-      # puts e.backtrace
-      errors.add(:parse_data, e)
+        errors.add(:parse_data, e)
+      end
     end
   end
-end
 
-def get_feed
-  unless self.new_record?
-    "We are now going to check this record's time stamp to see if we should hit the server"
-    self.get_show_data if Time.now() - self.updated_at > 1.hours
-    self.touch
+  def get_feed
+    if Time.now() - self.updated_at > 1.hours && self.new_record? == false
+      self.get_show_data
+      self.save
+      self.touch
+    end
+    RSS::Parser.parse(self.data)
   end
-  RSS::Parser.parse(self.data)
-end
 end
