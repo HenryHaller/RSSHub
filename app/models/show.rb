@@ -2,7 +2,8 @@ require "open-uri"
 require "rss"
 
 class Show < ApplicationRecord
-  after_create :get_show_data, :update_episodes, :set_self_metadata
+  validate :can_open_url?, :can_parse_data?
+  after_create :update_episodes, :set_self_metadata
   # validates :rss_url, url: { no_local: true, schemes: ['https', 'http']  }
   has_many :episodes, dependent: :destroy
   has_and_belongs_to_many :users
@@ -57,9 +58,39 @@ class Show < ApplicationRecord
     "#{self.title}, #{self.episodes.length} Episodes, #{self.rss_url}"
   end
 
+  def can_open_url?
+    puts "running can_get_feed?"
+    begin
+      puts "inside of the begin"
+      self.get_show_data
+    rescue Errno::ENOENT => e
+      $stderr.puts "Caught the exception: #{e}"
+      errors.add(:retrieve_data, e)
+      # answer =  false
+    end
+    # puts "validation answer is #{answer}"
+    # answer
+  end
+
+  def can_parse_data?
+    puts "running can_parse_data"
+    begin
+      self.get_feed.class
+    rescue TypeError => e
+      $stderr.puts "Caught the exception: #{e}"
+      # puts e.backtrace
+      errors.add(:parse_data, e)
+      raise
+    end
+  end
+
   def get_feed
-    self.get_show_data if Time.now() - self.updated_at > 1.hours
-    self.touch
+    puts self.new_record?
+    unless self.new_record?
+      "We are now going to check this record's time stamp to see if we should hit the server"
+      self.get_show_data if Time.now() - self.updated_at > 1.hours
+      self.touch
+    end
     RSS::Parser.parse(self.data)
   end
 end
