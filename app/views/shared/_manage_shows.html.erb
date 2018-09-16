@@ -1,0 +1,28 @@
+<div id="manage_shows">
+  <h4 class="text-center">Manage Shows</h4>
+  <% current_user.shows.each do |show| %>
+  <div class="show-div">
+    <%= link_to show.title, show_path(show) %>
+    <%= link_to "Delete", show_path(show), method: :delete %>
+  </div>
+  <% end %>
+
+  <%= simple_form_for @show do |f| %>
+  <%= f.input :rss_url %>
+  <% if @show.errors.any? %>
+  <div class="errors-container">
+    <ul>
+      <% @show.errors.each do |error| %>
+      <% if error == :retrieve_data %>
+      <li>We couldn't retrieve any data from that location. Are you sure submitted a valid URL?</li>
+      <% elsif error == :parse_data %>
+      <li>We could parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= f.submit %>
+  <% end %>
+</div>
+<%= link_to('Logout', destroy_user_session_path, method: :delete) %>

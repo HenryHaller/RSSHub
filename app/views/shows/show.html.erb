@@ -1,3 +1,11 @@
-<% @show.episodes.each do |episode| %>
-<%= episode %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <%= render "shared/display_episodes" %>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <%= render "shared/manage_shows" %>
+    </div>
+
+  </div>
+</div>

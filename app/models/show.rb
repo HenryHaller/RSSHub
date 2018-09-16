@@ -1,11 +1,19 @@
 require "open-uri"
 require "rss"
+require "EpisodeAccessModule"
 
 class Show < ApplicationRecord
+  include EpisodeAccessModule
   validate :can_open_url?, :can_parse_data?, :on => :create
   after_create :update_episodes, :set_self_metadata
   has_many :episodes, dependent: :destroy
   has_and_belongs_to_many :users
+
+  # def episodes_from_newest_to_oldest(limit = nil)
+  #   episodes = self.episodes.order(pub_date: :desc)
+  #   episodes = episodes.slice(0, limit) if limit.class == Integer && limit <= episodes.length
+  #   episodes
+  # end
 
   def get_show_data
     puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}"
@@ -15,7 +23,6 @@ class Show < ApplicationRecord
       puts e.message
     end
   end
-
 
   def set_self_metadata
     if self.title

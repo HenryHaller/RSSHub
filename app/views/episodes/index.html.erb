@@ -1,57 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-8">
-      <h4 class="text-center">Episodes</h4>
-      <div class="episodes">
-        <% 20.times do |iteration| %>
-        <% episode = @episodes[iteration] %>
-        <% if episode %>
-        <div class="episode">
-          <%= link_to episode.title, episode.url %>
-          <% if episode.episode_img %>
-          <%= image_tag(episode.episode_img) %>
-          <% else %>
-          <% if episode.show.show_img %>
-          <%= image_tag(episode.show.show_img, style: "width: 64px") %>
-          <% end %>
-          <% end %>
-        </div>
-        <% end %>
-        <% end %>
-      </div >
+      <%= render "shared/display_episodes" %>
     </div>
 
 
 
     <div class="col-xs-12 col-sm-4">
-      <div id="manage_shows">
-        <h4 class="text-center">Manage Shows</h4>
-        <% @shows.each do |show| %>
-        <div class="show-div">
-          <%= show.title %>
-          <%= link_to "Delete", show_path(show), method: :delete %>
-        </div>
-        <% end %>
-
-        <%= simple_form_for @show do |f| %>
-        <%= f.input :rss_url %>
-        <% if @show.errors.any? %>
-        <div class="errors-container">
-          <ul>
-            <% @show.errors.each do |error| %>
-            <% if error == :retrieve_data %>
-            <li>We couldn't retrieve any data from that location. Are you sure submitted a valid URL?</li>
-            <% elsif error == :parse_data %>
-            <li>We could parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
-            <% end %>
-            <% end %>
-          </ul>
-        </div>
-        <% end %>
-        <%= f.submit %>
-        <% end %>
-      </div>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      <%= render "shared/manage_shows" %>
     </div>
 
   </div>

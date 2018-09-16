@@ -13,8 +13,7 @@ class ShowsController < ApplicationController
       # @show = Show.new
       # render "episodes/index"
     else
-      @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
-      @shows = current_user.shows
+      @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
       render "episodes/index"
     end
   end
@@ -25,6 +24,8 @@ class ShowsController < ApplicationController
   end
 
   def show
+    # @show is still set normally by the set_show method
+    @episodes = @show.from_newest_to_oldest_episodes
   end
 
   def destroy

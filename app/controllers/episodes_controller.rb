@@ -1,8 +1,7 @@
 class EpisodesController < ApplicationController
   def index
-    @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
+    @episodes = current_user.from_newest_to_oldest_episodes(limit=20)
     @show = Show.new
-    @shows = current_user.shows
 
     respond_to do |format|
       format.html # index.html.erb
