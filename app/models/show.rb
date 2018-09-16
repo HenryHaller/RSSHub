@@ -8,6 +8,7 @@ class Show < ApplicationRecord
   has_and_belongs_to_many :users
 
   def get_show_data
+    puts "retreiving show data for #{self.title}"
     self.data = open(self.rss_url).read
     self.save
   end
@@ -24,7 +25,7 @@ class Show < ApplicationRecord
     self.save
   end
 
-  def update_episodes(first_run = true)
+  def update_episodes(first_run = false)
     puts "updating past episodes for #{self.title}" if self.title
     feed = get_feed
     feed.items.each do |episode|
@@ -38,11 +39,11 @@ class Show < ApplicationRecord
         )
       unless ep.save
         puts ep.errors.messages
-        puts ep.title
+        puts "failed to save #{ep.title}"
         break
       else
-        unless first_run # if this us first run then we don't want to be sending out emails
-          puts "first run is false"
+        if first_run # if this us first run then we don't want to be sending out emails
+          puts "first run is true"
           # self.users.each do |user|
           #   puts "sending email to #{user}"
           #   NewEpisodeMailer.with(user: user, episode: ep).new_episode_email.deliver_now
@@ -58,6 +59,7 @@ class Show < ApplicationRecord
 
   def get_feed
     self.get_show_data if Time.now() - self.updated_at > 1.hours
+    self.touch
     RSS::Parser.parse(self.data)
   end
 end
