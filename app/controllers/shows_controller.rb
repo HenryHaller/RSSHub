@@ -5,9 +5,9 @@ class ShowsController < ApplicationController
   end
 
   def create
-    @show = Show.new(show_params)
-    if @show.save
-      current_user.shows << @show
+    @new_show = Show.new(show_params)
+    if @new_show.save
+      current_user.shows << @new_show
       # @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
       # @shows = current_user.shows
       # @show = Show.new
@@ -19,13 +19,13 @@ class ShowsController < ApplicationController
   end
 
   def index
-    @shows = current_user.shows
-    @show = Show.new
+    redirect_to episodes_path
   end
 
   def show
     # @show is still set normally by the set_show method
     @episodes = @show.from_newest_to_oldest_episodes
+    @new_show = Show.new
   end
 
   def destroy

@@ -1,3 +1,5 @@
+require "EpisodeAccessModule"
+
 class User < ApplicationRecord
   include EpisodeAccessModule
   has_and_belongs_to_many :shows

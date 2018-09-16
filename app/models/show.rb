@@ -62,6 +62,7 @@ class Show < ApplicationRecord
         end
       end
     end
+    self.touch
   end
 
   def inspect
@@ -85,20 +86,16 @@ class Show < ApplicationRecord
     unless self.errors.details.include?(:retrieve_data) # if we already can't load this data then there's no need to see if we can parse it or not
       puts "running can_parse_data"
       begin
-        self.get_feed.class
+        self.get_feed
       rescue TypeError => e
         $stderr.puts "Caught the exception: #{e}"
+        puts e.backtrace if Rails.env == "development"
         errors.add(:parse_data, e)
       end
     end
   end
 
   def get_feed
-    if Time.now() - self.updated_at > 1.hours && self.new_record? == false
-      self.get_show_data
-      self.save
-      self.touch
-    end
     RSS::Parser.parse(self.data)
   end
 end
