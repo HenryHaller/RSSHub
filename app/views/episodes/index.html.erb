@@ -21,6 +21,8 @@
       </div >
     </div>
 
+
+
     <div class="col-xs-12 col-sm-4">
       <div id="manage_shows">
         <h4 class="text-center">Manage Shows</h4>
@@ -30,12 +32,24 @@
           <%= link_to "Delete", show_path(show), method: :delete %>
         </div>
         <% end %>
+
         <%= simple_form_for @show do |f| %>
         <%= f.input :rss_url %>
+        <% if @show.errors.any? %>
+        <div class="errors-container">
+          <ul>
+            <% @show.errors.each do |error| %>
+            <% if error == :retrieve_data %>
+            <li>We couldn't retrieve any data from that location. Are you sure submitted a valid URL?</li>
+            <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
         <%= f.submit %>
         <% end %>
       </div>
-       <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
     </div>
 
   </div>

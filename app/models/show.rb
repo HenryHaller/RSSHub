@@ -2,16 +2,19 @@ require "open-uri"
 require "rss"
 
 class Show < ApplicationRecord
-  validate :can_open_url?, :can_parse_data?
+  validate :can_open_url?, :can_parse_data?, :on => :create
   after_create :update_episodes, :set_self_metadata
-  # validates :rss_url, url: { no_local: true, schemes: ['https', 'http']  }
   has_many :episodes, dependent: :destroy
   has_and_belongs_to_many :users
 
   def get_show_data
     puts "retreiving show data for #{self.title}"
+    begin
     self.data = open(self.rss_url).read
     self.save
+    rescue Errno::ECONNREFUSED => e
+      puts e.message
+    end
   end
 
   def set_self_metadata
@@ -59,9 +62,8 @@ class Show < ApplicationRecord
   end
 
   def can_open_url?
-    puts "running can_get_feed?"
+    puts "running can_open_url?"
     begin
-      puts "inside of the begin"
       self.get_show_data
     rescue Errno::ENOENT => e
       $stderr.puts "Caught the exception: #{e}"
@@ -73,24 +75,24 @@ class Show < ApplicationRecord
   end
 
   def can_parse_data?
-    puts "running can_parse_data"
-    begin
-      self.get_feed.class
-    rescue TypeError => e
-      $stderr.puts "Caught the exception: #{e}"
+    unless self.errors.details.include?(:retrieve_data) # if we already can't load this data then there's no need to see if we can parse it or not
+      puts "running can_parse_data"
+      begin
+        self.get_feed.class
+      rescue TypeError => e
+        $stderr.puts "Caught the exception: #{e}"
       # puts e.backtrace
       errors.add(:parse_data, e)
-      raise
     end
   end
+end
 
-  def get_feed
-    puts self.new_record?
-    unless self.new_record?
-      "We are now going to check this record's time stamp to see if we should hit the server"
-      self.get_show_data if Time.now() - self.updated_at > 1.hours
-      self.touch
-    end
-    RSS::Parser.parse(self.data)
+def get_feed
+  unless self.new_record?
+    "We are now going to check this record's time stamp to see if we should hit the server"
+    self.get_show_data if Time.now() - self.updated_at > 1.hours
+    self.touch
   end
+  RSS::Parser.parse(self.data)
+end
 end

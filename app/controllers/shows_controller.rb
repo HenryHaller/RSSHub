@@ -5,15 +5,18 @@ class ShowsController < ApplicationController
   end
 
   def create
-    show = Show.new(show_params)
-    if show.save
-      current_user.shows << show
+    @show = Show.new(show_params)
+    if @show.save
+      current_user.shows << @show
       # @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
       # @shows = current_user.shows
       # @show = Show.new
       # render "episodes/index"
+    else
+      @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
+      @shows = current_user.shows
+      render "episodes/index"
     end
-      redirect_to episodes_path
   end
 
   def index
