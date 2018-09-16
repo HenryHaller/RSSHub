@@ -8,6 +8,7 @@ class ShowsController < ApplicationController
     @new_show = Show.new(show_params)
     if @new_show.save
       current_user.shows << @new_show
+      redirect_to episodes_path
       # @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
       # @shows = current_user.shows
       # @show = Show.new
