@@ -87,7 +87,7 @@ class Show < ApplicationRecord
       puts "running can_parse_data"
       begin
         self.get_feed
-      rescue TypeError => e
+      rescue TypeError, RSS::NotWellFormedError => e
         $stderr.puts "Caught the exception: #{e}"
         puts e.backtrace if Rails.env == "development"
         errors.add(:parse_data, e)
