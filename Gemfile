@@ -20,6 +20,9 @@ gem 'webpacker'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'validate_url'
 
+gem "interactor", "~> 3.0"
+
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
