@@ -8,4 +8,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
+
+  def already_subscribed?(rss_url)
+    self.shows.any? { |show| show.rss_url == rss_url }
+  end
 end
