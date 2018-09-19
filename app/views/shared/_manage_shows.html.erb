@@ -14,7 +14,7 @@
     <ul>
       <% @new_show.errors.each do |error| %>
       <% if error == :retrieve_data %>
-      <li>We couldn't retrieve any data from that location. Are you sure submitted a valid URL?</li>
+      <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
       <% elsif error == :parse_data %>
       <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
       <% end %>
