@@ -2,8 +2,9 @@
   "name": "RSSHub",
   "private": true,
   "version": "1.0",
+  "description": "A hub for Podcast RSSes",
   "engines": {
-    "yarn": "1.9.4"
+    "yarn": "1.9.x"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
