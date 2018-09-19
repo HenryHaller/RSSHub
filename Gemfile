@@ -16,9 +16,10 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'jquery-rails' # Add this line if you use Rails 5.1 or higher
+
 
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'validate_url'
 
 gem "interactor", "~> 3.0"
 
