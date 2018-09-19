@@ -39,6 +39,8 @@ class Show < ApplicationRecord
 
   def update_episodes(first_run = false)
     puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
+    self.get_show_data
+    self.save
     feed = get_feed
     feed.items.each do |episode|
       ep = Episode.new(
@@ -51,7 +53,6 @@ class Show < ApplicationRecord
         )
       unless ep.save
         puts ep.errors.messages
-        puts "failed to save #{ep.title}"
         break
       else
         if first_run # if this us first run then we don't want to be sending out emails
