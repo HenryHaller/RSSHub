@@ -3,10 +3,13 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
-    "bootstrap": "3",
-    "jquery": "^3.3.1"
+    "bootstrap": "4.1.3",
+    "caniuse-lite": "^1.0.30000697",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.4",
+    "webpack": "^2.2.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "2.11.2"
+    "webpack-dev-server": "^2.11.1"
   }
 }
