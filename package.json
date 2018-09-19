@@ -1,6 +1,7 @@
 {
   "name": "RSSHub",
   "private": true,
+  "version": "1.0",
   "engines": {
     "yarn": "1.9.4"
   },
