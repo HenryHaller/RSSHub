@@ -1,6 +1,9 @@
 {
   "name": "RSSHub",
   "private": true,
+  "engines": {
+    "yarn": "1.9.4"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "bootstrap": "4.1.3",
