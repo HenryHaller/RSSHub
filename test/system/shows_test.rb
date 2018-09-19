@@ -42,13 +42,4 @@ class ShowsTest < ApplicationSystemTestCase
     # save_and_open_screenshot
   end
 
-  # test "lets a new user delete their new show" do
-  #   login(:george)
-
-  #   click_on 'Delete'
-
-  #   assert_text "Test Feed", maximum: 0
-  #   assert_equal episodes_path, page.current_path
-  # end
-
 end
