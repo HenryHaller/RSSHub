@@ -22,6 +22,7 @@ class ShowsTest < ApplicationSystemTestCase
     # save_and_open_screenshot
 
     click_on 'Create Show'
+    assert_text "You are now subscribed to Test Feed."
     # save_and_open_screenshot
 
     puts
@@ -43,10 +44,12 @@ class ShowsTest < ApplicationSystemTestCase
     assert_text "Episodes"
     click_on 'Delete'
 
-    assert_text "Test Feed", maximum: 0
+    assert_text "Unsubscribed from Test Feed at #{rss_url}."
+    assert_text "test podcast 1", maximum: 0
+    # assert_text "Test Feed", maximum: 0
     assert_equal episodes_path, page.current_path
 
-    save_and_open_screenshot
+    # save_and_open_screenshot
   end
 
   test "does not add a malformed url" do
@@ -63,7 +66,7 @@ class ShowsTest < ApplicationSystemTestCase
     puts
 
     assert_text "The feed at #{rss_url} was not retrievable."
-    save_and_open_screenshot
+    # save_and_open_screenshot
   end
 
   test "does not add an un parseable url" do
@@ -80,7 +83,13 @@ class ShowsTest < ApplicationSystemTestCase
     puts
 
     assert_text "The feed at #{rss_url} was not parseable."
-    save_and_open_screenshot
+    # save_and_open_screenshot
+  end
+
+  test "unsubscribes from but does not delete a show that also belongs to other users" do
+    rss_url = "http://localhost:3001/feed.rss"
+
+
   end
 
 

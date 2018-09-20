@@ -28,7 +28,8 @@ class ShowsController < ApplicationController
   end
 
   def destroy
-    @show.destroy
+    result = DeleteRequest.call(show: @show, user_id: current_user.id)
+    flash[:notice] = "Unsubscribed from #{@show.title} at #{@show.rss_url}."
     redirect_to episodes_path
   end
 
