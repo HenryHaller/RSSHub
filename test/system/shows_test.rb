@@ -24,13 +24,21 @@ class ShowsTest < ApplicationSystemTestCase
     click_on 'Create Show'
     # save_and_open_screenshot
 
+    puts
+    puts page.current_path
+    puts
+
     fill_in "show_rss_url", with: rss_url
     # save_and_open_screenshot
 
     click_on 'Create Show'
+
+    puts
+    puts page.current_path
+    puts
     # save_and_open_screenshot
-    assert_text "You are already subscribed to #{rss_url}."
-    assert_text "Test Feed", maximum: 1
+    assert_text "You are already subscribed to #{rss_url}"
+    assert_text "Test Feed", minimum: 1
 
     # Should be redirected to Home with new product
     assert_text "Episodes"

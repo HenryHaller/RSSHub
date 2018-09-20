@@ -33,7 +33,7 @@ class AddRequest
     context.user.shows << context.show unless context.user_already_subscribed
 
     if context.user_already_subscribed
-      context.user_reply = "You are already subscribed to #{context.show.title}."
+      context.user_reply = "You are already subscribed to #{context.show.rss_url} as #{context.show.title}."
     elsif !context.retrievable
       context.user_reply = "The feed at #{context.show.rss_url} was not retrievable."
     elsif !context.parseable
