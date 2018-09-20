@@ -100,6 +100,9 @@ GEM
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     interactor (3.1.1)
+    interactor-rails (2.2.0)
+      interactor (~> 3.0)
+      rails (>= 4.2, < 5.3)
     io-like (0.3.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -251,6 +254,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 5.0.9)
   interactor (~> 3.0)
+  interactor-rails (~> 2.0)
   jbuilder (~> 2.0)
   jquery-rails
   launchy
@@ -274,4 +278,4 @@ RUBY VERSION
    ruby 2.4.4p296
 
 BUNDLED WITH
-   1.16.4
+   1.16.5
