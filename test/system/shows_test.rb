@@ -46,7 +46,25 @@ class ShowsTest < ApplicationSystemTestCase
     assert_text "Test Feed", maximum: 0
     assert_equal episodes_path, page.current_path
 
+    save_and_open_screenshot
+  end
+
+  test "does not add a malformed url" do
+    rss_url = "asdf"
+    login(:george)
+    fill_in "show_rss_url", with: rss_url
     # save_and_open_screenshot
+
+    click_on 'Create Show'
+    # save_and_open_screenshot
+
+    puts
+    puts page.current_path
+    puts
+
+    assert_text "The feed at #{rss_url} was not retrievable."
+    save_and_open_screenshot
+
   end
 
 end

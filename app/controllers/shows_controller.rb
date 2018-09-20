@@ -16,25 +16,6 @@ class ShowsController < ApplicationController
       @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
       render "episodes/index"
     end
-    # if result.user_already_subscribed
-    # end
-  #   unless current_user.already_subscribed?(show_params[:rss_url])
-  #     @new_show = Show.new(show_params)
-  #     if @new_show.save
-  #       current_user.shows << @new_show
-  #       redirect_to episodes_path
-  #       # @episodes = current_user.episodes.order(pub_date: :desc).limit(15)
-  #       # @shows = current_user.shows
-  #       # @show = Show.new
-  #       # render "episodes/index"
-  #     else
-  #       @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
-  #       render "episodes/index"
-  #     end
-  # else
-  #   flash[:notice] = "You are already subscribed to #{show_params[:rss_url]}."
-  #   redirect_to episodes_path
-  # end
 end
 
 def index

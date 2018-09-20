@@ -7,12 +7,12 @@
   </div>
   <% end %>
 
-  <%= simple_form_for @new_show do |f| %>
+  <%= simple_form_for @show do |f| %>
   <%= f.input :rss_url %>
-  <% if @new_show.errors.any? %>
+  <% if @show.errors.any? %>
   <div class="errors-container">
     <ul>
-      <% @new_show.errors.each do |error| %>
+      <% @show.errors.each do |error| %>
       <% if error == :retrieve_data %>
       <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
       <% elsif error == :parse_data %>

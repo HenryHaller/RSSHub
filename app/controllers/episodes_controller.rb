@@ -1,13 +1,7 @@
 class EpisodesController < ApplicationController
   def index
     @episodes = current_user.from_newest_to_oldest_episodes(limit=20)
-    if params[:rss_url]
-      @new_show = Show.new(rss_url: params[:rss_url])
-      @new_show.errors.add(:rss_url)
-    else
-      @new_show = Show.new
-    end
-
+    @show = Show.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @episodes }
