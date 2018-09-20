@@ -5,7 +5,7 @@ class ShowsController < ApplicationController
   end
 
   def create
-    result = ProcessAddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
+    result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
     pp result
     unless current_user.already_subscribed?(show_params[:rss_url])
       @new_show = Show.new(show_params)
