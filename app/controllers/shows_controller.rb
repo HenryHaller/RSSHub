@@ -16,16 +16,15 @@ class ShowsController < ApplicationController
       @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
       render "episodes/index"
     end
-end
+  end
 
-def index
-  redirect_to episodes_path
-end
+  def index
+    redirect_to episodes_path
+  end
 
-def show
+  def show
     # @show is still set normally by the set_show method
     @episodes = @show.from_newest_to_oldest_episodes
-    @new_show = Show.new
   end
 
   def destroy
