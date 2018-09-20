@@ -37,8 +37,7 @@ class ShowsTest < ApplicationSystemTestCase
     puts page.current_path
     puts
     # save_and_open_screenshot
-    assert_text "You are already subscribed to #{rss_url}"
-    assert_text "Test Feed", minimum: 1
+    assert_text "You are already subscribed to #{rss_url} as Test Feed."
 
     # Should be redirected to Home with new product
     assert_text "Episodes"
