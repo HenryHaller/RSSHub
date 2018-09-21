@@ -6,7 +6,7 @@ class ShowsController < ApplicationController
 
   def create
     result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
-    pp result
+    # pp result
     # @show = result.show
     flash[:notice] = result.user_reply
     if result.parseable
@@ -14,6 +14,7 @@ class ShowsController < ApplicationController
     else
       @show = result.show
       @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
+      @shows = current_user.shows
       render "episodes/index"
     end
   end
@@ -28,7 +29,7 @@ class ShowsController < ApplicationController
   end
 
   def destroy
-    result = DeleteRequest.call(show: @show, user_id: current_user.id)
+    result = DeleteRequest.call(show: @show, current_user: current_user)
     flash[:notice] = "Unsubscribed from #{@show.title} at #{@show.rss_url}."
     redirect_to episodes_path
   end

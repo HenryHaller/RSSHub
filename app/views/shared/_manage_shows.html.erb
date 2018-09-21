@@ -1,10 +1,20 @@
 <div id="manage_shows">
-  <h4 class="text-center">Manage Shows</h4>
-  <% current_user.shows.each do |show| %>
+  <h4 class="text-center">Manage Shows for <%= current_user.email %></h4>
+  <% puts %>
+  <%# p current_user.shows, current_user.email %>
+  <%= current_user.id %>
+  <%= current_user.shows %>
+  <%= current_user.shows.count %>
+  <%= current_user.shows.first.class %>
+  <% if Show.first %>
+  <%= Show.first.users.first.email %>
+  <% end %>
+  <% @shows.each do |show| %>
   <div class="show-div">
     <%= link_to show.title, show_path(show) %>
     <%= link_to "Delete", show_path(show), method: :delete %>
   </div>
+  <%# raise %>
   <% end %>
 
   <%= simple_form_for @show do |f| %>

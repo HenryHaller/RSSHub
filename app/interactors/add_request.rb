@@ -53,6 +53,7 @@ class AddRequest
       return
     else
       context.user.shows << context.show
+      context.user.shows
       context.user_reply = context.user_reply % {title: context.show.title}
     end
 

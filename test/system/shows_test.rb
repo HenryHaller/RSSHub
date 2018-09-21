@@ -25,18 +25,18 @@ class ShowsTest < ApplicationSystemTestCase
     assert_text "You are now subscribed to Test Feed."
     # save_and_open_screenshot
 
-    puts
-    puts page.current_path
-    puts
+    # puts
+    # puts page.current_path
+    # puts
 
     fill_in "show_rss_url", with: rss_url
     # save_and_open_screenshot
 
     click_on 'Create Show'
 
-    puts
-    puts page.current_path
-    puts
+    # puts
+    # puts page.current_path
+    # puts
     # save_and_open_screenshot
     assert_text "You are already subscribed to #{rss_url} as Test Feed."
 
@@ -61,9 +61,9 @@ class ShowsTest < ApplicationSystemTestCase
     click_on 'Create Show'
     # save_and_open_screenshot
 
-    puts
-    puts page.current_path
-    puts
+    # puts
+    # puts page.current_path
+    # puts
 
     assert_text "The feed at #{rss_url} was not retrievable."
     # save_and_open_screenshot
@@ -78,18 +78,12 @@ class ShowsTest < ApplicationSystemTestCase
     click_on 'Create Show'
     # save_and_open_screenshot
 
-    puts
-    puts page.current_path
-    puts
+    # puts
+    # puts page.current_path
+    # puts
 
     assert_text "The feed at #{rss_url} was not parseable."
     # save_and_open_screenshot
-  end
-
-  test "unsubscribes from but does not delete a show that also belongs to other users" do
-    rss_url = "http://localhost:3001/feed.rss"
-
-
   end
 
 

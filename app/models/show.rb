@@ -17,7 +17,7 @@ class Show < ApplicationRecord
   # end
 
   def get_show_data
-    puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}" if Rails.env == "development" || "test"
+    # puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}" if Rails.env == "development" || "test"
     begin
       self.data = open(self.rss_url).read
     rescue Errno::ECONNREFUSED => e
@@ -27,9 +27,9 @@ class Show < ApplicationRecord
 
   def set_self_metadata
     if self.title
-      puts "updating show set_self_metadata for #{self.title}" if Rails.env == "development" || "test"
+      # puts "updating show set_self_metadata for #{self.title}" if Rails.env == "development" || "test"
     else
-      puts "updating show set_self_metadata for #{self.rss_url}" if Rails.env == "development" || "test"
+      # puts "updating show set_self_metadata for #{self.rss_url}" if Rails.env == "development" || "test"
     end
     feed = get_feed
     self.title = feed.channel.title
@@ -38,7 +38,7 @@ class Show < ApplicationRecord
   end
 
   def update_episodes(first_run = false)
-    puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
+    # puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
     self.get_show_data
     self.save
     feed = get_feed
@@ -73,7 +73,7 @@ class Show < ApplicationRecord
 
   def can_open_url?
     unless self.errors.details.include?(:rss_url)
-      puts "running can_open_url? on #{self.rss_url}" if Rails.env == "development" || "test"
+      # puts "running can_open_url? on #{self.rss_url}" if Rails.env == "development" || "test"
       begin
         self.get_show_data
       rescue Errno::ENOENT => e
@@ -89,7 +89,7 @@ class Show < ApplicationRecord
   def can_parse_data?
     unless self.errors.details.include?(:rss_url)
       unless self.errors.details.include?(:retrieve_data) # if we already can't load this data then there's no need to see if we can parse it or not
-        puts "running can_parse_data on #{self.rss_url}" if Rails.env == "development" || "test"
+        # puts "running can_parse_data on #{self.rss_url}" if Rails.env == "development" || "test"
         begin
           self.get_feed
         rescue TypeError, RSS::NotWellFormedError => e
