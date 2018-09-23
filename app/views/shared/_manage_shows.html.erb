@@ -2,10 +2,6 @@
   <h4 class="text-center">Manage Shows for <%= current_user.email %></h4>
   <% puts %>
   <%# p current_user.shows, current_user.email %>
-  <%= current_user.id %>
-  <%= current_user.shows %>
-  <%= current_user.shows.count %>
-  <%= current_user.shows.first.class %>
   <% if Show.first %>
   <%= Show.first.users.first.email %>
   <% end %>
