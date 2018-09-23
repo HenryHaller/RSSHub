@@ -1,10 +1,5 @@
 <div id="manage_shows">
   <h4 class="text-center">Manage Shows for <%= current_user.email %></h4>
-  <% puts %>
-  <%# p current_user.shows, current_user.email %>
-  <% if Show.first %>
-  <%= Show.first.users.first.email %>
-  <% end %>
   <% @shows.each do |show| %>
   <div class="show-div">
     <%= link_to show.title, show_path(show) %>
