@@ -1,8 +1,5 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: [:show, :destroy]
-  def new
-    @show = Show.new
-  end
 
   def create
     result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
@@ -26,6 +23,7 @@ class ShowsController < ApplicationController
   def show
     # @show is still set normally by the set_show method
     @episodes = @show.from_newest_to_oldest_episodes
+    @shows = current_user.shows
   end
 
   def destroy

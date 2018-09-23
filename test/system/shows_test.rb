@@ -13,7 +13,7 @@ class ShowsTest < ApplicationSystemTestCase
     assert_equal episodes_path, page.current_path
   end
 
-  test "lets a new user create and delete a new show" do
+  test "lets a new user create, view, and delete a new show" do
     rss_url = "http://localhost:3001/feed.rss"
     login(:george)
     # save_and_open_screenshot
@@ -39,9 +39,11 @@ class ShowsTest < ApplicationSystemTestCase
     # puts
     # save_and_open_screenshot
     assert_text "You are already subscribed to #{rss_url} as Test Feed."
+    assert_text "Episodes"
+    click_on "Test Feed"
+    assert_text "Episodes"
 
     # Should be redirected to Home with new product
-    assert_text "Episodes"
     click_on 'Delete'
 
     assert_text "Unsubscribed from Test Feed at #{rss_url}."
