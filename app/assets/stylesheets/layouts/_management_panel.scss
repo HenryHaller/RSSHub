@@ -1,0 +1,16 @@
+@media (min-width: 996px) {
+  #manage_shows {
+    min-height: 100vh;
+    width: 17.5vw;
+    position: fixed;
+  }
+
+  #three_level_management {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 80px);
+
+  }
+}
+

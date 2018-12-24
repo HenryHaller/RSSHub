@@ -1,37 +1,48 @@
-<div id="manage_shows">
-  <h4 class="text-center">Manage Shows for <%= current_user.email %></h4>
-  <% @shows.each do |show| %>
-    <div class="show-div">
-      <%= link_to show.title, show_path(show) %>
-      <%= link_to "Delete", show_path(show), method: :delete %>
-    </div>
-  <%# raise %>
-  <% end %>
+<div id="manage_shows" class="text-center">
+  <h4>Manage Shows</h4>
+  <h5 class="text-center"><%= current_user.email %></h5>
 
-  <%= simple_form_for @show do |f| %>
-  <%= f.input :rss_url %>
-  <% if @show.errors.any? %>
-  <div class="errors-container">
-    <ul>
-      <% @show.errors.each do |error| %>
-      <% if error == :retrieve_data %>
-      <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
-      <% elsif error == :parse_data %>
-      <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+  <div id="three_level_management" class="text-center">
+    <div> <!-- urls section -->
+      <% @shows.each do |show| %>
+        <div class="show-div">
+          <%= link_to show.title, show_path(show) %>
+          <%= link_to "Delete", show_path(show), method: :delete %>
+        </div>
+      <%# raise %>
       <% end %>
-    </ul>
+    </div>
+
+    <div> <!-- create new show -->
+      <%= simple_form_for @show do |f| %>
+      <%= f.input :rss_url %>
+      <% if @show.errors.any? %>
+      <div class="errors-container">
+        <ul>
+          <% @show.errors.each do |error| %>
+          <% if error == :retrieve_data %>
+          <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
+          <% elsif error == :parse_data %>
+          <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <% end %>
+      <%= f.submit %>
+      <% end %>
+    </div>
+
+    <div > <!-- links section -->
+      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      <% if current_user.role == "admin" %>
+        <br>
+        <%= link_to "Admin Panel", "asdf" %>
+      <% end %>
+      <% if @shows.count > 0 %>
+        <br>
+        <%= link_to "Subscribed URLs", urls_path %>
+      <% end %>
+    </div>
   </div>
-  <% end %>
-  <% end %>
-  <%= f.submit %>
-  <% end %>
 </div>
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-<% if current_user.role == "admin" %>
-  <br>
-  <%= link_to "Admin Panel", "asdf" %>
-<% end %>
-<% if @shows.count > 0 %>
-  <br>
-  <%= link_to "Subscribed URLs", urls_path %>
-<% end %>

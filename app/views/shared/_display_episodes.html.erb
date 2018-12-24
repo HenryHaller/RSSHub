@@ -1,16 +1,12 @@
-  <h4 class="text-center">Episodes</h4>
-  <h5><%= @show.title %></h5>
-  <div class="episodes">
-    <% @episodes.each do |episode| %>
-    <div class="episode">
-      <%= link_to episode.title, episode.url %>
-      <% if episode.episode_img %>
-      <%= image_tag(episode.episode_img) %>
-      <% else %>
-      <% if episode.show.show_img %>
+<h4>Episodes</h4>
+<h5><%= @show.title %></h5>
+<div class="episodes">
+  <% @episodes.each do |episode| %>
+  <div class="episode">
+    <%= link_to episode.title, episode.url %>
+    <% if episode.show.show_img %>
       <%= image_tag(episode.show.show_img, style: "height: 64px") %>
-      <% end %>
-      <% end %>
-    </div>
     <% end %>
-  </div >
+  </div>
+  <% end %>
+</div >
