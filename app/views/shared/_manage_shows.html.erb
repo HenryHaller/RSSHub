@@ -27,3 +27,11 @@
   <% end %>
 </div>
 <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<% if current_user.role == "admin" %>
+  <br>
+  <%= link_to "Admin Panel", "asdf" %>
+<% end %>
+<% if @shows.count > 0 %>
+  <br>
+  <%= link_to "Subscribed URLs", urls_path, download: "rsshub_subscriptions.txt" %>
+<% end %>
