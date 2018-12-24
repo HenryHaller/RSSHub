@@ -1,0 +1,16 @@
+#episodes-title {
+  position: fixed;
+  background: $light-gray;
+  opacity: 1;
+  border-style: none none solid none;
+}
+
+#episodes{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  img {
+    height: 64px;
+  }
+}
