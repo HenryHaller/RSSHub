@@ -9,6 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
 
+  has_many :login_activities, as: :user # use :user no matter what your model name
 
   enum role: {
     user: 0,

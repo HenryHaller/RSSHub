@@ -24,7 +24,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem "interactor", "~> 3.0"
 gem "interactor-rails", "~> 2.0"
 
-
+gem 'authtrail'
+gem 'maxminddb' # some kind of lightweight geocoder
 
 
 group :development do
