@@ -6,7 +6,6 @@
 }
 
 #episodes{
-  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -14,3 +13,10 @@
     height: 64px;
   }
 }
+
+@media (min-width: 769px) {
+  #episodes {
+    margin-top: 80px;
+  }
+}
+
