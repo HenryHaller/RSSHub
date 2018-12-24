@@ -9,6 +9,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
 
+
+  enum role: {
+    user: 0,
+    admin: 1
+  }
+
   def already_subscribed?(rss_url)
     self.shows.any? { |show| show.rss_url == rss_url }
   end
