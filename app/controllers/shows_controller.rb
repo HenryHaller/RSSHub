@@ -32,6 +32,10 @@ class ShowsController < ApplicationController
     redirect_to episodes_path
   end
 
+  def urls
+    @shows = current_user.shows
+  end
+
   private
 
   def show_params
