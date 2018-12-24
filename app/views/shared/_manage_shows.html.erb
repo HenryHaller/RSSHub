@@ -1,10 +1,10 @@
 <div id="manage_shows">
   <h4 class="text-center">Manage Shows for <%= current_user.email %></h4>
   <% @shows.each do |show| %>
-  <div class="show-div">
-    <%= link_to show.title, show_path(show) %>
-    <%= link_to "Delete", show_path(show), method: :delete %>
-  </div>
+    <div class="show-div">
+      <%= link_to show.title, show_path(show) %>
+      <%= link_to "Delete", show_path(show), method: :delete %>
+    </div>
   <%# raise %>
   <% end %>
 
@@ -33,5 +33,5 @@
 <% end %>
 <% if @shows.count > 0 %>
   <br>
-  <%= link_to "Subscribed URLs", urls_path, download: "rsshub_subscriptions.txt" %>
+  <%= link_to "Subscribed URLs", urls_path %>
 <% end %>
