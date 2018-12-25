@@ -1,8 +1,8 @@
-<div id="manage_shows" class="text-center">
+<div id="manage_shows">
   <h4>Manage Shows</h4>
-  <h5 class="text-center"><%= current_user.email %></h5>
+  <h5><%= current_user.email %></h5>
 
-  <div id="three_level_management" class="text-center">
+  <div id="three_level_management">
     <div> <!-- urls section -->
       <% @shows.each do |show| %>
         <div class="show-div">
@@ -14,23 +14,23 @@
     </div>
 
     <div> <!-- create new show -->
-      <%= simple_form_for @show do |f| %>
-      <%= f.input :rss_url %>
-      <% if @show.errors.any? %>
-      <div class="errors-container">
-        <ul>
-          <% @show.errors.each do |error| %>
-          <% if error == :retrieve_data %>
-          <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
-          <% elsif error == :parse_data %>
-          <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
-          <% end %>
-        </ul>
-      </div>
-      <% end %>
+    <%= simple_form_for @show do |f| %>
+        <%= f.input :rss_url %>
+        <% if @show.errors.any? %>
+        <div class="errors-container">
+          <ul>
+            <% @show.errors.each do |error| %>
+            <% if error == :retrieve_data %>
+            <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
+            <% elsif error == :parse_data %>
+            <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
       <% end %>
       <%= f.submit %>
-      <% end %>
+    <% end %>
     </div>
 
     <div > <!-- links section -->
