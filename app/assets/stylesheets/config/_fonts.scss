@@ -1,7 +1,9 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|News+Cycle');
+@import url('https://fonts.googleapis.com/css?family=News+Cycle');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
 // Define fonts for body and headers
-$body-font: 'Anonymous Pro', monospace;
+$body-font: 'Fira Sans', sans-serif;
 $headers-font: 'News Cycle', sans-serif;
 
 // To use a font file (.woff) uncomment following lines
