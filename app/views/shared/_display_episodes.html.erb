@@ -5,15 +5,6 @@
     </h5>
 </div>
 <div id="episodes">
-  <% @episodes.each do |episode| %>
-  <div class="episode">
-    <%= link_to episode.title, episode.url %>
-    <% if episode.show.show_img %>
-      <%= image_tag episode.show.show_img, onerror: "this.onerror=null;this.src='images/mp3.svg';" %>
-    <% else %>
-      <%= image_tag 'mp3.svg' %>
-    <% end %>
-  </div>
-  <% end %>
+    <%= render @episodes %>
 </div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro">catkuro</a> from <a href="https://www.flaticon.com/"          title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/"          title="Creative Commons BY 3.0" target="_blank">CC 3.0</a></div>
