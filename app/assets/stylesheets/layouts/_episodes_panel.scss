@@ -1,5 +1,4 @@
 #episodes-title {
-  position: fixed;
   background: $light-gray;
   opacity: 1;
   border-style: none none solid none;
@@ -14,11 +13,5 @@
     height: 64px;
   }
   background-color: white;
-}
-
-@media (min-width: 769px) {
-  #episodes {
-    margin-top: 80px;
-  }
 }
 

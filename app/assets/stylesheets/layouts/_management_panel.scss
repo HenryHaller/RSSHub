@@ -1,19 +1,27 @@
 @media (min-width: 996px) {
-  #manage_shows {
-    min-height: 100vh;
+  div#manage-shows {
     width: 17.5vw;
-    position: fixed;
+    min-height: 100vh;
   }
 
-  #three_level_management {
+  div.stick-bottom {
+    position: fixed;
+    bottom: 0;
+  }
+
+}
+  #column-flex {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100vh - 80px);
   }
-}
 
 .show-div {
   display: flex;
   justify-content: space-between;
+}
+
+div.stick-top {
+  position: sticky;
+  top: 0;
 }

@@ -1,9 +1,8 @@
-<div id="manage_shows">
-  <h4>Manage Shows</h4>
-  <h5><%= current_user.email %></h5>
-
-  <div id="three_level_management">
-    <div> <!-- urls section -->
+<div id="manage-shows">
+  <div id="column-flex" class="sticky">
+    <div>
+      <h4>Manage Shows</h4>
+      <h5><%= current_user.email %></h5>
       <% @shows.each do |show| %>
         <div class="show-div">
           <%= link_to show.title, show_path(show) %>
@@ -11,9 +10,6 @@
         </div>
       <%# raise %>
       <% end %>
-    </div>
-
-    <div> <!-- create new show -->
     <%= simple_form_for @show do |f| %>
         <%= f.input :rss_url %>
         <% if @show.errors.any? %>
@@ -33,7 +29,7 @@
     <% end %>
     </div>
 
-    <div > <!-- links section -->
+    <div class="stick-bottom">
       <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
       <% if current_user.role == "admin" %>
         <br>
@@ -46,3 +42,4 @@
     </div>
   </div>
 </div>
+
