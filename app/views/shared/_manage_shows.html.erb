@@ -1,6 +1,6 @@
 <div id="manage-shows">
-  <div id="column-flex" class="sticky">
-    <div>
+  <div class="column-flex">
+    <div class="sticky">
       <h4>Manage Shows</h4>
       <h5><%= current_user.email %></h5>
       <% @shows.each do |show| %>
@@ -25,11 +25,11 @@
         </div>
         <% end %>
       <% end %>
-      <%= f.submit %>
+      <%= f.submit "Subscribe", class: "submit" %>
     <% end %>
     </div>
 
-    <div class="stick-bottom">
+    <div class="stick-bottom column-flex">
       <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
       <% if current_user.role == "admin" %>
         <br>

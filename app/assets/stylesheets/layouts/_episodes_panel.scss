@@ -1,17 +1,32 @@
 #episodes-title {
-  background: $light-gray;
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
+  h5 {
+    margin: 0;
+    padding: 0;
+  }
+
   opacity: 1;
   border-style: none none solid none;
+  background-color: $panel-color;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+  padding: 0 2vw 7px 2vw;
 }
 
-#episodes{
-  padding-top: 0.95vh;
+#episodes {
+  background-color: $episodes-panel !important;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   img {
-    height: 64px;
+    height: 48px;
   }
   background-color: white;
+  padding: 1vw 2vw 0 2vw;
 }
-

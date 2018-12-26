@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-md-offset-1">
+    <div class="col-sm-12 col-md-6 col-md-offset-1" id="episode-column">
       <%= render "shared/display_episodes" %>
     </div>
 
-    <div class="col-sm-12 col-md-2 col-md-offset-1">
+    <div class="col-sm-12 col-md-2 col-md-offset-1" id="management-column">
       <%= render "shared/manage_shows" %>
     </div>
 
@@ -12,3 +12,4 @@
 </div>
 
 <%= javascript_pack_tag "resize_title" %>
+<%= javascript_pack_tag "resize_management_height" %>
