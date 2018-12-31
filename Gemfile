@@ -26,6 +26,8 @@ gem "interactor-rails", "~> 2.0"
 
 gem 'authtrail'
 gem 'maxminddb' # some kind of lightweight geocoder
+gem 'rubocop', '~> 0.61.1', require: false
+
 
 
 group :development do
