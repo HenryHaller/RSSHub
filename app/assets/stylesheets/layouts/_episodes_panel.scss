@@ -20,6 +20,7 @@
 }
 
 #episodes {
+  padding: 2vh 2vw 0 2vw;
   background-color: $episodes-panel !important;
   display: flex;
   flex-direction: column;
@@ -28,5 +29,19 @@
     height: 48px;
   }
   background-color: white;
-  padding: 1vw 2vw 0 2vw;
 }
+
+#episode-column {
+  padding: 0;
+}
+
+@media (min-width: 996px) {
+  #episodes {
+  padding: 2vw 2vw 0 2vw;
+  }
+
+  #episode-column {
+    padding: auto 15px;
+  }
+}
+
