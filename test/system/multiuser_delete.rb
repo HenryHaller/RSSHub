@@ -46,16 +46,16 @@ class MultiuserDelete < ApplicationSystemTestCase
     assert_text "Unsubscribed from Test Feed at #{rss_url}."
     assert_text "episode 5", maximum: 0
     puts "george@abitbol.com shows"
-    User.where(email: "george@abitbol.com").first.shows.each {|show| puts show}
+    User.where(email: "george@abitbol.com").first.shows.each { |show| puts show }
 
     logout
 
     login(:george)
     # save_and_open_screenshot
     puts "george@abitbol.com shows"
-    User.where(email: "george@abitbol.com").first.shows.each {|show| puts show}
+    User.where(email: "george@abitbol.com").first.shows.each { |show| puts show }
     puts "sam@serious.com shows"
-    User.where(email: "sam@serious.com").first.shows.each {|show| puts show}
+    User.where(email: "sam@serious.com").first.shows.each { |show| puts show }
     puts "shows in database: #{Show.count}"
     puts Show.first.users
     # save_and_open_screenshot
@@ -65,6 +65,4 @@ class MultiuserDelete < ApplicationSystemTestCase
     login(:sam)
     assert_text "Test Feed", maximum: 0
   end
-
-
 end

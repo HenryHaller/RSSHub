@@ -1,5 +1,5 @@
 class ShowsController < ApplicationController
-  before_action :set_show, only: [:show, :destroy]
+  before_action :set_show, only: %i[show destroy]
 
   def create
     result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
@@ -27,7 +27,7 @@ class ShowsController < ApplicationController
   end
 
   def destroy
-    result = DeleteRequest.call(show: @show, current_user: current_user)
+    DeleteRequest.call(show: @show, current_user: current_user)
     flash[:notice] = "Unsubscribed from #{@show.title} at #{@show.rss_url}."
     redirect_to episodes_path
   end

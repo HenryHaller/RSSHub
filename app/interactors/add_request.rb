@@ -2,8 +2,7 @@ class AddRequest
   include Interactor
   def call
     context.show_already_in_database = false       # Assume that we don't already know this show
-    context.user_already_subscribed = false        # Assume that the user is not
-                                                   # already subscribed to this show
+    context.user_already_subscribed = false        # Assume that the user is not already subscribed to this show
 
     context.retrievable = true                      # Assume we can retrieve data
     context.parseable = true                        # Assume we can parse the retrieve data
@@ -20,13 +19,13 @@ class AddRequest
 
 
     context.user_reply = "You are now subscribed to %{title}."
-    #use the show validation to see if we already track this show or not
+    # use the show validation to see if we already track this show or not
     context.show = Show.create(rss_url: context.rss_url)
     if context.show.errors.include?(:rss_url)
       if context.show.errors.details[:rss_url][0][:error] == :taken
         context.show = Show.where(rss_url: context.rss_url).first
         context.user.shows << context.show
-        context.user_reply = context.user_reply % {title: context.show.title}
+        context.user_reply = format(context.user_reply, title: context.show.title)
       else
         puts "Some weird rss_url error happened"
         context.fail!
@@ -54,9 +53,7 @@ class AddRequest
     else
       context.user.shows << context.show
       context.user.shows
-      context.user_reply = context.user_reply % {title: context.show.title}
+      context.user_reply = format(context.user_reply, title: context.show.title)
     end
-
   end
-
 end

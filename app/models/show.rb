@@ -1,11 +1,11 @@
 require "open-uri"
 require "rss"
-require "EpisodeAccessModule"
+require "episode_access_module"
 
 class Show < ApplicationRecord
   include EpisodeAccessModule
   validates :rss_url, uniqueness: true
-  validate :can_open_url?, :can_parse_data?, :on => :create
+  validate :can_open_url?, :can_parse_data?, on: :create
   after_create :set_self_metadata, :update_episodes
   has_many :episodes, dependent: :destroy
   has_and_belongs_to_many :users
@@ -16,7 +16,7 @@ class Show < ApplicationRecord
   #   episodes
   # end
 
-  def get_show_data
+  def fetch_show_data
     # puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}" if Rails.env == "development" || "test"
     begin
       self.data = open(self.rss_url).read
@@ -26,12 +26,7 @@ class Show < ApplicationRecord
   end
 
   def set_self_metadata
-    if self.title
-      # puts "updating show set_self_metadata for #{self.title}" if Rails.env == "development" || "test"
-    else
-      # puts "updating show set_self_metadata for #{self.rss_url}" if Rails.env == "development" || "test"
-    end
-    feed = get_feed
+    feed = self.feed
     self.title = feed.channel.title
     self.show_img = feed.channel.image.url if feed.channel.image
     self.save
@@ -39,9 +34,9 @@ class Show < ApplicationRecord
 
   def update_episodes(first_run = false)
     # puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
-    self.get_show_data
+    self.fetch_show_data
     self.save
-    feed = get_feed
+    feed = self.feed
     feed.items.each do |episode|
       ep = Episode.new(
         title: episode.title,
@@ -50,18 +45,14 @@ class Show < ApplicationRecord
         description: episode.description,
         pub_date: episode.pubDate,
         show: self
-        )
-      unless ep.save
-        puts ep.errors.messages
-        break
+      )
+      if ep.save
+        # if first_run # if this us first run then we don't want to be sending out emails
+        #   puts "first run is true"
+        # end
       else
-        if first_run # if this us first run then we don't want to be sending out emails
-          puts "first run is true"
-          # self.users.each do |user|
-          #   puts "sending email to #{user}"
-          #   NewEpisodeMailer.with(user: user, episode: ep).new_episode_email.deliver_now
-          # end
-        end
+        # puts ep.errors.messages
+        break
       end
     end
     self.touch
@@ -75,9 +66,9 @@ class Show < ApplicationRecord
     unless self.errors.details.include?(:rss_url)
       # puts "running can_open_url? on #{self.rss_url}" if Rails.env == "development" || "test"
       begin
-        self.get_show_data
+        self.fetch_show_data
       rescue Errno::ENOENT => e
-        $stderr.puts "Caught the exception: #{e}"
+        Rails.logger.warn "Caught the exception: #{e}"
         errors.add(:retrieve_data, e)
         # answer =  false
       end
@@ -91,17 +82,17 @@ class Show < ApplicationRecord
       unless self.errors.details.include?(:retrieve_data) # if we already can't load this data then there's no need to see if we can parse it or not
         # puts "running can_parse_data on #{self.rss_url}" if Rails.env == "development" || "test"
         begin
-          self.get_feed
+          self.feed
         rescue TypeError, RSS::NotWellFormedError => e
-          $stderr.puts "Caught the exception: #{e}"
-          puts e.backtrace if Rails.env == "development"
+          Rails.logger.warn "Caught the exception: #{e}"
+          Rails.logger.warn e.backtrace
           errors.add(:parse_data, e)
         end
       end
     end
   end
 
-  def get_feed
+  def feed
     RSS::Parser.parse(self.data)
   end
 end

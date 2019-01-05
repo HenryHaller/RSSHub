@@ -16,13 +16,13 @@ puts 'creating one user'
 henry = User.new(
   email: "test_user@henryhaller.website",
   password: "123456"
-  )
+)
 puts henry.errors.messages unless henry.save
 
 puts 'creating one show'
 cth = Show.new(
   rss_url: 'http://feeds.soundcloud.com/users/soundcloud:users:211911700/sounds.rss'
-  )
+)
 puts cth.errors.messages unless cth.save
 
 puts 'assigning the show to the user'
@@ -33,6 +33,6 @@ puts 'creating one episode'
 ep = Episode.new(
   title: "this is the test episode",
   show: cth
-  )
+)
 
 puts ep.errors.messages unless ep.save

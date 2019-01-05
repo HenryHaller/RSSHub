@@ -8,12 +8,12 @@ class ShowTest < ActiveSupport::TestCase
   test "fails to lookup as it should" do
     show = Show.new(rss_url: "asdf")
     show.valid?
-    assert_includes(show.errors, :retrieve_data, "the errors correctly include the :retrieve_data error" )
+    assert_includes(show.errors, :retrieve_data, "the errors correctly include the :retrieve_data error")
   end
   test "fails to parse as it should" do
     show = Show.new(rss_url: "https://www.perdu.com/")
     show.valid?
-    assert_includes(show.errors, :parse_data, "the errors correctly include the :parse_data error" )
+    assert_includes(show.errors, :parse_data, "the errors correctly include the :parse_data error")
   end
 
 

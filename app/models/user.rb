@@ -1,4 +1,4 @@
-require "EpisodeAccessModule"
+require "episode_access_module"
 
 class User < ApplicationRecord
   include EpisodeAccessModule
@@ -6,8 +6,8 @@ class User < ApplicationRecord
   has_many :episodes, through: :shows
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
+  devise  :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :validatable
 
   has_many :login_activities, as: :user # use :user no matter what your model name
 
