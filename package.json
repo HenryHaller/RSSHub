@@ -12,6 +12,7 @@
     "caniuse-lite": "^1.0.30000885",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.4",
+    "responsive-toolkit": "^2.6.3",
     "webpack": "^3.0.0"
   },
   "devDependencies": {

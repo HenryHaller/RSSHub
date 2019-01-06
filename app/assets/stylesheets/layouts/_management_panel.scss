@@ -3,13 +3,13 @@
     width: 17.5vw;
     min-height: 100vh;
     padding: 0 2vw;
+    min-width: 300px;
   }
 
   div.stick-bottom {
-    position: fixed;
-    bottom: 0;
-    padding-bottom: 1vh;
-  }
+    position: sticky;
+    bottom: 0px;
+    padding-bottom: 8px;  }
 
 }
 
@@ -28,6 +28,10 @@ div.stick-top {
   border-radius: 5px;
   display: flex;
   justify-content: center;
+}
+
+#management-column {
+  padding: 0;
 }
 
 .column-flex {
