@@ -1,6 +1,7 @@
 class EpisodesController < ApplicationController
   def index
-    @episodes = current_user.from_newest_to_oldest_episodes(20) # limit = 20
+    # @episodes = current_user.from_newest_to_oldest_episodes(20) # limit = 20
+    @episodes = current_user.episodes.includes(:show).order(pub_date: :desc).limit(20)
     @show = Show.new
     @shows = User.find(current_user.id).shows
     # byebug
