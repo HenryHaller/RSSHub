@@ -16,6 +16,8 @@ body {
   color: $text;
 }
 
-.main {
-  padding-top: 12px;
+@media (min-width: 996px) {
+  .main {
+    padding-top: 12px;
+  }
 }
