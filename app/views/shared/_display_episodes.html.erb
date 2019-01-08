@@ -5,5 +5,5 @@
     </h5>
 </div>
 <div id="episodes">
-    <%= render @episodes %>
+    <%= render partial: 'episodes/episode', collection: @episodes, cached: true %>
 </div>
