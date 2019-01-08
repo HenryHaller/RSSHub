@@ -1,1 +1,3 @@
-<%= render "shared/two_column_view" %>
+<% cache @episodes do %>
+  <%= render "shared/two_column_view" %>
+<% end %>

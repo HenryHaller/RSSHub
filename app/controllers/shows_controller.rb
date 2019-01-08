@@ -7,10 +7,11 @@ class ShowsController < ApplicationController
     # @show = result.show
     flash[:notice] = result.user_reply
     if result.parseable
+      current_user.touch
       redirect_to episodes_path
     else
       @show = result.show
-      @episodes = current_user.from_newest_to_oldest_episodes.limit(20)
+      @episodes = current_user.episodes.includes(:show).order(pub_date: :desc).limit(20)
       @shows = current_user.shows
       render "episodes/index"
     end
