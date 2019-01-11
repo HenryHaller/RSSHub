@@ -8,7 +8,7 @@ class Show < ApplicationRecord
   validate :can_open_url?, :can_parse_data?, on: :create
   after_create :set_self_metadata, :update_episodes
   has_many :episodes, dependent: :destroy
-  has_and_belongs_to_many :users, touch: true
+  has_and_belongs_to_many :users
 
   # def episodes_from_newest_to_oldest(limit = nil)
   #   episodes = self.episodes.order(pub_date: :desc)
@@ -36,19 +36,12 @@ class Show < ApplicationRecord
     # puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
     self.fetch_show_data
     self.save
-    updated = false
+    show_updated = false
     feed = self.feed
     feed.items.each do |episode|
-      ep = Episode.new(
-        title: episode.title,
-        url: episode.enclosure.url,
-        duration: episode.enclosure.length,
-        description: episode.description,
-        pub_date: episode.pubDate,
-        show: self
-      )
+      ep = make_episode(episode)
       if ep.save
-        updated = true
+        show_updated = true
         # if first_run # if this us first run then we don't want to be sending out emails
         #   puts "first run is true"
         # end
@@ -57,7 +50,19 @@ class Show < ApplicationRecord
         break # stop updating the shows table if one of the show saves fails
       end
     end
+    self.users.update_all(updated_at: Time.now) if show_updated
     self.touch
+  end
+
+  def make_episode(episode)
+    Episode.new(
+      title: episode.title,
+      url: episode.enclosure.url,
+      duration: episode.enclosure.length,
+      description: episode.description,
+      pub_date: episode.pubDate,
+      show: self
+    )
   end
 
   def inspect
