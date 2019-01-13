@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     get 'panel', to: 'admin#panel'
   end
   get 'urls', to: 'shows#urls'
+  get 'csv', to: 'shows#csv'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

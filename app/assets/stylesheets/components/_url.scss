@@ -1,0 +1,12 @@
+// for url listing
+.url {
+  img {
+    height: 48px;
+  }
+  @media (min-width: 996px) {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

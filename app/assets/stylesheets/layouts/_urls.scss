@@ -1,0 +1,17 @@
+.urls-title {
+  background-color: $panel-color;
+  @media (min-width: 996px) {
+      margin-bottom: 3vh;
+      text-align: center;
+  }
+}
+
+.url {
+  @media (min-width: 996px) {
+    border-radius: none;
+    border-style: none;
+    padding-bottom: 2vh;
+  }
+  border-style: none none solid none;
+  border-radius: 5px;
+}

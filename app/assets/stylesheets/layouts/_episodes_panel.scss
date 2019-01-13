@@ -9,12 +9,12 @@
   }
 
   opacity: 1;
-  border-style: none none solid none;
   background-color: $panel-color;
   height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border-style: none none solid none;
   border-radius: 5px;
   padding: 0 2vw 7px 2vw;
 }
