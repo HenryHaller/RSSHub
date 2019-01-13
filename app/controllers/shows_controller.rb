@@ -33,11 +33,21 @@ class ShowsController < ApplicationController
     redirect_to episodes_path
   end
 
-  def urls
+  def subscriptions
     @shows = current_user.shows
+    respond_to do |format|
+      format.html
+      format.csv { render plain: csv }
+    end
   end
 
+  def csv
+    "asdf"
+  end
+
+
   private
+
 
   def show_params
     params.require(:show).permit(:rss_url)

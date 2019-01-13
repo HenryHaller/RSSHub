@@ -1,12 +1,11 @@
-.urls-title {
-  background-color: $panel-color;
+.subscriptions-title {
   @media (min-width: 996px) {
       margin-bottom: 3vh;
       text-align: center;
   }
 }
 
-.url {
+.subscription {
   @media (min-width: 996px) {
     border-radius: none;
     border-style: none;
