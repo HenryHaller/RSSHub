@@ -42,7 +42,12 @@ class ShowsController < ApplicationController
   end
 
   def csv
-    "asdf"
+    CSV.generate do |csv|
+      csv << ["Title", "URL"]
+      @shows.each do |show|
+        csv << [show.title, show.rss_url]
+      end
+    end
   end
 
 

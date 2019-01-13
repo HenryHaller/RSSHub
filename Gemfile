@@ -18,6 +18,7 @@ gem "uglifier"
 gem "webpacker"
 gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
 
+gem "csv"
 
 gem "active_model_serializers", "~> 0.10.0"
 
