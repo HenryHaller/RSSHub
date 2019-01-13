@@ -2,20 +2,24 @@
   div#manage-shows {
     width: 17.5vw;
     min-height: 100vh;
-    padding: 0 2vw;
-    min-width: 300px;
+    // padding: 0 2vw;
   }
 
   div.stick-bottom {
-    position: sticky;
-    bottom: 0px;
-    padding-bottom: 8px;  }
+    padding-bottom: 8px;
+  }
 
+  #management-title {
+    border-style: none none solid none;
+  }
 }
 
 .show-div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  margin-top: 12px;
 }
 
 div.stick-top {
@@ -23,11 +27,23 @@ div.stick-top {
   top: 0;
 }
 
+.shows {
+  padding: 1.5vh 8px 0 1vw;
+}
+
 #manage-shows {
   background-color: $panel-color;
   border-radius: 5px;
   display: flex;
   justify-content: center;
+
+  .show-title{
+    width: 50%;
+  }
+}
+
+#management-title {
+  padding-left: 1vw;
 }
 
 #management-column {

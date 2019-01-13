@@ -1,32 +1,38 @@
 <div id="manage-shows">
   <div class="column-flex">
     <div class="sticky">
-      <h4>Manage Shows</h4>
-      <h5><%= current_user.email %></h5>
-      <% @shows.each do |show| %>
-        <div class="show-div">
-          <%= link_to show.title, show_path(show) %>
-          <%= link_to "Delete", show_path(show), method: :delete %>
-        </div>
-      <%# raise %>
-      <% end %>
-    <%= simple_form_for @show do |f| %>
-        <%= f.input :rss_url %>
-        <% if @show.errors.any? %>
-        <div class="errors-container">
-          <ul>
-            <% @show.errors.each do |error| %>
-            <% if error == :retrieve_data %>
-            <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
-            <% elsif error == :parse_data %>
-            <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
-            <% end %>
-          </ul>
-        </div>
+      <div id="management-title">
+        <h4>Manage Shows</h4>
+        <h5><%= current_user.email %></h5>
+      </div>
+      <div class="shows">
+        <% @shows.each do |show| %>
+          <div class="show-div">
+            <div class="show-title">
+              <%= link_to show.title, show_path(show) %>
+            </div>
+            <%= link_to "Delete", show_path(show), method: :delete %>
+          </div>
+        <%# raise %>
         <% end %>
-      <% end %>
-      <%= f.submit "Subscribe", class: "submit" %>
-    <% end %>
+        <%= simple_form_for @show do |f| %>
+            <%= f.input :rss_url %>
+            <% if @show.errors.any? %>
+            <div class="errors-container">
+              <ul>
+                <% @show.errors.each do |error| %>
+                <% if error == :retrieve_data %>
+                <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
+                <% elsif error == :parse_data %>
+                <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+          <% end %>
+          <%= f.submit "Subscribe", class: "submit" %>
+        <% end %>
+      </div>
     </div>
 
     <div class="stick-bottom column-flex">
