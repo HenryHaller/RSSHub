@@ -1,6 +1,5 @@
 @media (min-width: 996px) {
   div#manage-shows {
-    width: 17.5vw;
     min-height: 100vh;
     // padding: 0 2vw;
   }
@@ -22,11 +21,6 @@
   margin-top: 12px;
 }
 
-div.stick-top {
-  position: sticky;
-  top: 0;
-}
-
 .shows {
   padding: 1.5vh 8px 0 1vw;
 }
@@ -34,8 +28,6 @@ div.stick-top {
 #manage-shows {
   background-color: $panel-color;
   border-radius: 5px;
-  display: flex;
-  justify-content: center;
 
   .show-title{
     width: 50%;
@@ -44,10 +36,16 @@ div.stick-top {
 
 #management-title {
   padding-left: 1vw;
+  padding-right: 8px;
 }
 
 #management-column {
   padding: 0;
+}
+
+.title-and-logout {
+  opacity: 1;
+  background-color: $panel-color;
 }
 
 .column-flex {

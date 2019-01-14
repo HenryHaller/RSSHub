@@ -1,10 +1,15 @@
-<div id="manage-shows">
-  <div class="column-flex">
-    <div class="sticky">
-      <div id="management-title">
+<div id="manage-shows" class="column-flex">
+  <div>
+    <div class="row-flex sticky title-and-logout" id="management-title">
+      <div class="management-title">
         <h4>Manage Shows</h4>
         <h5><%= current_user.email %></h5>
       </div>
+      <div id="logout">
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      </div>
+    </div>
+    <div class="title-and-links">
       <div class="shows">
         <% @shows.each do |show| %>
           <div class="show-div">
@@ -16,7 +21,7 @@
         <%# raise %>
         <% end %>
         <%= simple_form_for @show do |f| %>
-            <%= f.input :rss_url %>
+            <%= f.input :rss_url, label: "RSS Feed or SoundCloud Homepage" %>
             <% if @show.errors.any? %>
             <div class="errors-container">
               <ul>
@@ -34,17 +39,16 @@
         <% end %>
       </div>
     </div>
+  </div>
 
-    <div class="stick-bottom column-flex">
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-      <% if current_user.role == "admin" %>
-        <br>
-        <%= link_to "Admin Panel", "asdf" %>
-      <% end %>
-      <% if @shows.count > 0 %>
-        <br>
-        <%= link_to "Subscribed URLs", subscriptions_path %>
-      <% end %>
-    </div>
+  <div class="stick-bottom column-flex">
+    <% if current_user.role == "admin" %>
+      <br>
+      <%= link_to "Admin Panel", "asdf" %>
+    <% end %>
+    <% if @shows.count > 0 %>
+      <br>
+      <%= link_to "Subscribed URLs", subscriptions_path %>
+    <% end %>
   </div>
 </div>
