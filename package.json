@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "A hub for Podcast RSSes",
   "engines": {
-    "yarn": "1.12.x"
+    "yarn": "1.13.0"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
