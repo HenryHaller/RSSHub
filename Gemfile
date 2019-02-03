@@ -33,7 +33,7 @@ gem "authtrail"
 gem "maxminddb" # some kind of lightweight geocoder
 gem "rubocop", "~> 0.61.1", require: false
 
-
+gem 'feedjira' # hopefully tihs is a better feed parser than stdlib
 
 group :development do
   gem "web-console", ">= 3.3.0"

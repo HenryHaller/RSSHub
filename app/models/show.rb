@@ -27,8 +27,8 @@ class Show < ApplicationRecord
 
   def set_self_metadata
     feed = self.feed
-    self.title = feed.channel.title
-    self.show_img = feed.channel.image.url if feed.channel.image
+    self.title = feed.title
+    self.show_img = feed.itunes_image if feed.itunes_image
     self.save
   end
 
@@ -38,7 +38,7 @@ class Show < ApplicationRecord
     self.save
     show_updated = false
     feed = self.feed
-    feed.items.each do |episode|
+    feed.entries.each do |episode|
       ep = make_episode(episode)
       if ep.save
         show_updated = true
@@ -57,10 +57,10 @@ class Show < ApplicationRecord
   def make_episode(episode)
     Episode.new(
       title: episode.title,
-      url: episode.enclosure.url,
-      duration: episode.enclosure.length,
-      description: episode.description,
-      pub_date: episode.pubDate,
+      url: episode.enclosure_url,
+      duration: episode.enclosure_length,
+      description: episode.summary,
+      pub_date: episode.published,
       show: self
     )
   end
@@ -100,6 +100,6 @@ class Show < ApplicationRecord
   end
 
   def feed
-    RSS::Parser.parse(self.data)
+    Feedjira::Feed.parse self.data
   end
 end
