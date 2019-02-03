@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 ruby "2.6.0"
 gem 'rails', '~> 6.0.0.beta1'
+gem 'sendgrid-actionmailer'
 
 gem "bootsnap", require: false
 gem "devise"
