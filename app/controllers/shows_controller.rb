@@ -3,8 +3,6 @@ class ShowsController < ApplicationController
 
   def create
     result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
-    # pp result
-    # @show = result.show
     flash[:notice] = result.user_reply
     if result.parseable
       current_user.touch
@@ -30,7 +28,7 @@ class ShowsController < ApplicationController
   def destroy
     DeleteRequest.call(show: @show, current_user: current_user)
     flash[:notice] = "Unsubscribed from #{@show.title} at #{@show.rss_url}."
-    redirect_to episodes_path
+    redirect_back fallback_location: episodes_path
   end
 
   def subscriptions

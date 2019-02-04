@@ -1,16 +1,17 @@
-<div class="container-fluid">
-  <div class="row main">
-    <div class="col-sm-12 col-md-8" id="episode-column">
-      <%= render "shared/display_episodes" %>
-    </div>
+<% cache [@episodes, @shows] do %>
+  <div class="container-fluid">
+    <div class="row main">
+      <div class="col-sm-12 col-md-8" id="episode-column">
+        <%= render "shared/display_episodes" %>
+      </div>
 
-    <div class="col-sm-12 col-md-3 col-md-offset-1" id="management-column">
-      <%= render "shared/manage_shows" %>
-    </div>
+      <div class="col-sm-12 col-md-3 col-md-offset-1" id="management-column">
+        <%= render "shared/manage_shows" %>
+      </div>
 
+    </div>
   </div>
-</div>
-
+<% end %>
 <%= javascript_pack_tag "resize_title" %>
 <%= javascript_pack_tag "resize_management_height" %>
 <div class="text-center attribution">Icon made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro" target="_blank">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/"          title="Creative Commons BY 3.0" target="_blank">CC 3.0.</a></div>

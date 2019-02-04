@@ -4,7 +4,8 @@ class EpisodesController < ApplicationController
     if stale?(current_user)
       @episodes = current_user.episodes.includes(:show).order(pub_date: :desc).limit(20)
       @show = Show.new
-      @shows = User.find(current_user.id).shows
+      # @shows = User.find(current_user.id).shows
+      @shows = current_user.shows
       # byebug
       respond_to do |format|
         format.html # index.html.erb
