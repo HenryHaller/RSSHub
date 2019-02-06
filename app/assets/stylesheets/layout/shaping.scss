@@ -1,0 +1,49 @@
+.primary-container {
+  margin: 0px;
+  padding: 0px;
+  min-height: calc(100vh - 60px);
+}
+
+@media (min-width: 1200px) {
+  .primary-container {
+    min-height: 100vh;
+  }
+
+  .main {
+    margin-top: 1em;
+  }
+}
+
+.show-icon-img {
+  height: 64px;
+}
+
+.sidebar-content {
+  @media (min-width: 1200px) {
+    height: calc(100vh - 140px);
+  }
+}
+
+.title-management-box {
+  width: 100%;
+}
+
+.shows-grid {
+  width: 100%;
+}
+
+.footer {
+  height: 100%;
+}
+
+.header {
+  height: 100%;
+}
+
+.email-box {
+  height: 100%;
+}
+
+.logout-box {
+  height: 100%;
+}

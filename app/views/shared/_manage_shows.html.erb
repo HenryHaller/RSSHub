@@ -1,54 +1,39 @@
-<div id="manage-shows" class="column-flex">
-  <div>
-    <div class="row-flex sticky title-and-logout" id="management-title">
-      <div class="management-title">
-        <h4>Manage Shows</h4>
-        <h5><%= current_user.email %></h5>
-      </div>
-      <div id="logout">
-        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-      </div>
-    </div>
-    <div class="title-and-links">
-      <div class="shows">
-        <% @shows.each do |show| %>
-          <div class="show-div">
-            <div class="show-title">
-              <%= link_to show.title, show_path(show) %>
-            </div>
-            <%= link_to "Delete", show_path(show), method: :delete %>
-          </div>
-        <%# raise %>
+<div class="sidebar-content">
+  <h4>
+    Manage Shows
+  </h2>
+
+  <%= simple_form_for @show do |f| %>
+    <%= f.input :rss_url, label: "RSS Feed or SoundCloud Homepage" %>
+    <% if @show.errors.any? %>
+    <div class="errors-container">
+      <ul>
+        <% @show.errors.each do |error| %>
+        <% if error == :retrieve_data %>
+        <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
+        <% elsif error == :parse_data %>
+        <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
         <% end %>
-        <%= simple_form_for @show do |f| %>
-            <%= f.input :rss_url, label: "RSS Feed or SoundCloud Homepage" %>
-            <% if @show.errors.any? %>
-            <div class="errors-container">
-              <ul>
-                <% @show.errors.each do |error| %>
-                <% if error == :retrieve_data %>
-                <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
-                <% elsif error == :parse_data %>
-                <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
-                <% end %>
-              </ul>
-            </div>
-            <% end %>
-          <% end %>
-          <%= f.submit "Subscribe", class: "submit" %>
-        <% end %>
-      </div>
+      </ul>
     </div>
+    <% end %>
+    <% end %>
+    <%= f.submit "Subscribe", class: "submit" %>
+    <% end %>
+
+    <div class="shows-grid">
+    <% @shows.each do |show| %>
+    <div class="show-show">
+      <%= link_to show.title, show_path(show) %>
+    </div>
+    <div class="show-delete">
+      <%= link_to "Delete", show_path(show), method: :delete %>
+    </div>
+    <%# raise %>
+    <% end %>
   </div>
 
-  <div class="stick-bottom column-flex">
-    <% if current_user.role == "admin" %>
-      <br>
-      <%= link_to "Admin Panel", "asdf" %>
-    <% end %>
-    <% if @shows.count > 0 %>
-      <br>
-      <%= link_to "Subscribed URLs", subscriptions_path %>
-    <% end %>
-  </div>
+
+  <%= link_to "Subscribed URLs", subscriptions_path %>
+
 </div>

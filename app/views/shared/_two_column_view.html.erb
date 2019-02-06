@@ -1,17 +1,26 @@
 <% cache [@episodes, @shows] do %>
-  <div class="container-fluid">
-    <div class="row main">
-      <div class="col-sm-12 col-md-8" id="episode-column">
-        <%= render "shared/display_episodes" %>
+  <div class="primary-grid primary-container">
+    <div class="header">
+        New Header.
+    </div>
+    <div class="email-box">
+        <%= current_user.email %>
+    </div>
+    <div class="logout-box">
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </div>
+    <div class="main">
+      <%= render partial: 'episodes/episode', collection: @episodes, cached: true %>
+    </div>
+    <div class="sidebar">
+      <%= render partial: 'shared/manage_shows', locals: {shows: @shows} %>
+    </div>
+    <div class="footer">
+      <div>
+        Icon made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro" target="_blank">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0.</a>
       </div>
-
-      <div class="col-sm-12 col-md-3 col-md-offset-1" id="management-column">
-        <%= render "shared/manage_shows" %>
-      </div>
-
     </div>
   </div>
+
+
 <% end %>
-<%= javascript_pack_tag "resize_title" %>
-<%= javascript_pack_tag "resize_management_height" %>
-<div class="text-center attribution">Icon made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro" target="_blank">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/"          title="Creative Commons BY 3.0" target="_blank">CC 3.0.</a></div>

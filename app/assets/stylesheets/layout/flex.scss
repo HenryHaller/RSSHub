@@ -1,0 +1,31 @@
+@mixin flex($direction: row, $justify: space-around, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.title-management-box {
+  @include flex($justify: space-between);
+}
+
+
+.sidebar-content{
+  @include flex($direction: column, $justify: space-between);
+}
+
+.footer {
+  @include flex($align: center);
+}
+
+.header {
+  @include flex;
+}
+
+.logout-box {
+  @include flex($direction: column);
+}
+
+.email-box {
+  @include flex;
+}
