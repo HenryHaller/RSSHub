@@ -1,13 +1,10 @@
 <% cache [@episodes, @shows] do %>
   <div class="primary-grid primary-container">
     <div class="header">
-        New Header.
-    </div>
-    <div class="email-box">
-        <%= current_user.email %>
+        Latest Episodes
     </div>
     <div class="logout-box">
-        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+        <%= link_to("Logout #{current_user.email}", destroy_user_session_path, method: :delete) %>
     </div>
     <div class="main">
       <%= render partial: 'episodes/episode', collection: @episodes, cached: true %>

@@ -18,14 +18,14 @@
   @include flex($align: center);
 }
 
-.header {
+.header, .logout-box, .email-box {
   @include flex;
 }
 
-.logout-box {
-  @include flex($direction: column);
+.manage-show {
+  @include flex($justify: space-between);
 }
 
-.email-box {
-  @include flex;
+.manage-shows {
+  @include flex($direction: column, $justify: space-between)
 }

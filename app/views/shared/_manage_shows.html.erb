@@ -19,17 +19,15 @@
     <% end %>
     <% end %>
     <%= f.submit "Subscribe", class: "submit" %>
-    <% end %>
+  <% end %>
 
-    <div class="shows-grid">
+  <div class="manage-shows">
     <% @shows.each do |show| %>
-    <div class="show-show">
-      <%= link_to show.title, show_path(show) %>
-    </div>
-    <div class="show-delete">
-      <%= link_to "Delete", show_path(show), method: :delete %>
-    </div>
-    <%# raise %>
+      <div class="manage-show">
+        <div><%= link_to show.title, show_path(show) %></div>
+        <div><%= link_to "Delete", show_path(show), method: :delete %></div>
+      </div>
+      <%# raise %>
     <% end %>
   </div>
 

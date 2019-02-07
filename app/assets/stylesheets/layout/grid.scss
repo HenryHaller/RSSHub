@@ -1,53 +1,37 @@
 .primary-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px 40px 6fr 20px 1fr 20px 32px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 60px 20px 6fr 20px 1fr 20px 32px;
   grid-template-areas:
-  "hd"
-  "."
-  "main"
-  "."
-  "sd"
-  "."
-  "ft";
-
-  .email-box {
-    display: none;
-  }
+  "hd hd hd logout logout logout"
+  ". . . . . . "
+  "main main main main main main "
+  ". . . . . . "
+  "sd sd sd sd sd sd"
+  ". . . . . . "
+  "ft ft ft ft ft ft";
 
   .logout-box {
-    display: none;
+    grid-area: logout;
   }
 
   @media (min-width: 1200px) {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 60px 1fr 40px 40px;
     grid-template-areas:
-    "hd hd hd hd hd hd logout email"
-    "main main main main main main sd sd"
-    ".  .  .  .  .  .  .  ."
-    "ft ft ft ft ft ft ft ft";
+    "hd hd hd hd hd hd hd logout logout"
+    "main main main main main main sd sd ."
+    ".  .  .  .  .  .  .  . ."
+    "ft ft ft ft ft ft ft ft ft";
 
-    .email-box {
-      grid-area: email;
-      place-self: center center;
-      display: flex;
-
-    }
     .logout-box {
-      grid-area: logout;
-      place-self: center center;
-      display: flex;
+      align-self: center;
     }
   }
 }
 
 .header {
   grid-area: hd;
-  // grid-column-start: 2;
-  // grid-column-end: 6;
-  // grid-row-start: 1;
-  // grid-row-end: 2;
   place-self: center center;
 }
 
@@ -59,7 +43,7 @@
   grid-row-gap: 1em;
   .episode-title-box {
     grid-column-start: 1;
-    grid-column-end: 8;
+    grid-column-end: 10;
     justify-self: left;
     align-self:center;
   }
@@ -73,9 +57,10 @@
   @media (min-width: 1200px) {
     .episode-title-box {
       grid-column-start: 2;
+      grid-column-end: 8;
     }
     .show-icon-box {
-      grid-column-start: 9;
+      grid-column-start: 8;
       grid-column-end: 10;
     }
   }
@@ -87,20 +72,6 @@
   align-self: center;
   @media (min-width: 1200px) {
     align-self: start;
-  }
-  .shows-grid {
-    grid-row-gap: 0.5em;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    grid-auto-flow: column;
-  }
-  .show-show {
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
-  .show-delete {
-    grid-column-start: 2;
-    grid-column-end: 3;
   }
 }
 
