@@ -28,7 +28,7 @@ class Show < ApplicationRecord
   def set_self_metadata
     feed = self.feed
     self.title = feed.title
-    self.show_img = feed.itunes_image if feed.itunes_image
+    self.show_img = feed.itunes_image if feed.respond_to?(:itunes_image)
     self.save
   end
 
@@ -55,10 +55,14 @@ class Show < ApplicationRecord
   end
 
   def make_episode(episode)
+    url = episode.entry_id if episode.respond_to?(:entry_id)
+    url = episode.enclosure_url if episode.respond_to?(:enclosure_url)
+    duration = 0
+    duration = episode.enclosure_length if episode.respond_to?(:enclosure_length)
     Episode.new(
       title: episode.title,
-      url: episode.enclosure_url,
-      duration: episode.enclosure_length,
+      url: url,
+      duration: duration,
       description: episode.summary,
       pub_date: episode.published,
       show: self
@@ -100,6 +104,10 @@ class Show < ApplicationRecord
   end
 
   def feed
-    Feedjira::Feed.parse self.data
+    feed = Feedjira::Feed.parse self.data
+    Rails.logger.warn(
+      "\n                          #{feed.title} is a #{feed.class}         \n"
+      )
+    feed
   end
 end
