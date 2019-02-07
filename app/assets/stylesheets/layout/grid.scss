@@ -1,15 +1,16 @@
 .primary-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 60px 20px 6fr 20px 1fr 20px 32px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 20px 6fr 20px 1fr 20px 40px 32px;
   grid-template-areas:
-  "hd hd hd logout logout logout"
-  ". . . . . . "
-  "main main main main main main "
-  ". . . . . . "
-  "sd sd sd sd sd sd"
-  ". . . . . . "
-  "ft ft ft ft ft ft";
+  "hd"
+  "."
+  "main"
+  "."
+  "sd"
+  "."
+  "logout"
+  "ft";
 
   .logout-box {
     grid-area: logout;
