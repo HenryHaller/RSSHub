@@ -6,3 +6,10 @@
   position: sticky;
   bottom: 0px;
 }
+
+@media (min-width: 1200px) {
+  .logout-box {
+    position: stick;
+    top: 0px;
+  }
+}
