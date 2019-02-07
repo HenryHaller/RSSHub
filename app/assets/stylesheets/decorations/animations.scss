@@ -1,0 +1,13 @@
+@keyframes fadeOut{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.alert {
+  animation: 7s ease-out 0s 1 fadeOut;
+  display: none;
+}
