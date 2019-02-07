@@ -1,0 +1,9 @@
+<div class="title-management-box">
+  <div "title-column">
+    <h4>Manage Shows</h4>
+    <h4><%= current_user.email %></h5>
+  </div>
+  <div "logout-column">
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </div>
+</div>

@@ -1,8 +1,14 @@
-<%= link_to episode.url, class: "episode" do %>
-  <p><%= episode.title %></p>
+<div class="episode-title-box">
+  <%= link_to episode.url, class: "episode-link" do %>
+    <div class="download-link">
+        <%= episode.title %>
+    </div>
+  <% end %>
+</div>
+<div class="show-icon-box">
   <% if episode.show.show_img %>
     <%= image_tag episode.show.show_img, onerror: "this.onerror=null;this.src='images/mp3.svg';" %>
   <% else %>
     <%= image_tag 'mp3.svg' %>
   <% end %>
-<% end %>
+</div>

@@ -1,26 +1,25 @@
 source "https://rubygems.org"
 ruby "2.6.0"
 gem 'rails', '~> 6.0.0.beta1'
+
 gem 'sendgrid-actionmailer'
 
-gem "bootsnap", require: false
+gem 'bootsnap', '>= 1.1.0', require: false
 gem "devise"
 gem 'responders', git: 'https://github.com/plataformatec/responders'
 
 
 gem "jbuilder", "~> 2.0"
-gem "pg", "~> 0.21"
+gem 'pg', '>= 0.18', '< 2.0'
 gem "puma"
 gem "redis"
 
 gem "autoprefixer-rails"
-gem "bootstrap-sass", "~> 3.3"
-gem "font-awesome-sass", "~> 5.0.9"
-gem "sass-rails"
+gem 'sassc-rails'
 gem "simple_form"
 gem "uglifier"
-gem "webpacker"
-gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
+gem 'webpacker', '>= 4.0.0.rc.3'
+# gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
 
 gem "csv"
 

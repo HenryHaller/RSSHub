@@ -1,0 +1,88 @@
+.primary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 60px 20px 6fr 20px 1fr 20px 32px;
+  grid-template-areas:
+  "hd hd hd logout logout logout"
+  ". . . . . . "
+  "main main main main main main "
+  ". . . . . . "
+  "sd sd sd sd sd sd"
+  ". . . . . . "
+  "ft ft ft ft ft ft";
+
+  .logout-box {
+    grid-area: logout;
+  }
+  .black {
+    display: none;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: 60px 1fr 40px 40px;
+    grid-template-areas:
+    "hd   hd   hd   hd   hd   hd   logout logout black"
+    "main main main main main main sd     sd     ."
+    ".  .  .  .  .  .  .  . ."
+    "ft ft ft ft ft ft ft ft ft";
+
+    .logout-box {
+      align-self: center;
+    }
+
+    .black {
+      grid-area: black;
+      display: block;
+    }
+  }
+}
+
+.header {
+  grid-area: hd;
+  place-self: center center;
+}
+
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-auto-flow: column;
+  grid-row-gap: 1em;
+  .episode-title-box {
+    grid-column-start: 1;
+    grid-column-end: 10;
+    justify-self: left;
+    align-self:center;
+  }
+  .show-icon-box {
+    grid-column-start: 10;
+    grid-column-end: 11;
+    justify-self: center;
+    align-self:center;
+  }
+
+  @media (min-width: 1200px) {
+    .episode-title-box {
+      grid-column-start: 2;
+      grid-column-end: 8;
+    }
+    .show-icon-box {
+      grid-column-start: 8;
+      grid-column-end: 10;
+    }
+  }
+
+}
+
+.sidebar {
+  grid-area: sd;
+  align-self: center;
+  @media (min-width: 1200px) {
+    align-self: start;
+  }
+}
+
+.footer {
+  grid-area: ft;
+  place-self: center center;
+}
