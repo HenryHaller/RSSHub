@@ -19,7 +19,7 @@
 }
 
 .header, .logout-box {
-  @include flex;
+  @include flex($direction: column);
 }
 
 .manage-show {
