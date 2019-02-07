@@ -5,7 +5,7 @@
         <h4>Latest Episodes</h4>
     </div>
     <div class="logout-box">
-        <%= link_to("Logout #{current_user.email}", destroy_user_session_path, method: :delete) %>
+      <%= link_to("Logout #{current_user.email}", destroy_user_session_path) %>
     </div>
     <div class="main">
       <%= render partial: 'episodes/episode', collection: @episodes, cached: true %>
