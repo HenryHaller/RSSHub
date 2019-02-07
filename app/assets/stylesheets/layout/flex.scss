@@ -18,7 +18,7 @@
   @include flex($align: center);
 }
 
-.header, .logout-box, .email-box {
+.header, .logout-box {
   @include flex;
 }
 

@@ -14,18 +14,25 @@
   .logout-box {
     grid-area: logout;
   }
-
+  .black {
+    display: none;
+  }
   @media (min-width: 1200px) {
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 60px 1fr 40px 40px;
     grid-template-areas:
-    "hd hd hd hd hd hd hd logout logout"
-    "main main main main main main sd sd ."
+    "hd   hd   hd   hd   hd   hd   logout logout black"
+    "main main main main main main sd     sd     ."
     ".  .  .  .  .  .  .  . ."
     "ft ft ft ft ft ft ft ft ft";
 
     .logout-box {
       align-self: center;
+    }
+
+    .black {
+      grid-area: black;
+      display: block;
     }
   }
 }

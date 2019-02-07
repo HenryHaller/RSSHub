@@ -1,7 +1,8 @@
 <% cache [@episodes, @shows] do %>
   <div class="primary-grid primary-container">
+    <div class="black"></div>
     <div class="header">
-        Latest Episodes
+        <h4>Latest Episodes</h4>
     </div>
     <div class="logout-box">
         <%= link_to("Logout #{current_user.email}", destroy_user_session_path, method: :delete) %>
