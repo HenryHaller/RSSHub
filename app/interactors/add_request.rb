@@ -20,9 +20,9 @@ class AddRequest
     valid_metas = %w[twitter:app:url:iphone twitter:app:url:googleplay twitter:app:url:ipad al:ios:url al:android:url]
     noko = Nokogiri::HTML(open(home_page_url))
     property_metas = noko.search("meta[property]")
-    id_metas = property_metas.select { |meta| valid_metas.include? meta.attributes["property"].value}
+    id_metas = property_metas.select { |meta| valid_metas.include? meta.attributes["property"].value }
     Rails.logger.warn(noko)
-    id_array = id_metas.map { |meta| /[0-9]+/.match(meta.attributes["content"].value)}
+    id_array = id_metas.map { |meta| /[0-9]+/.match(meta.attributes["content"].value) }
     id_array = id_array.uniq
     # to do: raise error if there is more than one id in the mix
     soundcloud_id = id_array[0].to_s
