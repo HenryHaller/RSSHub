@@ -12,7 +12,7 @@ class AddRequest
     else
       is_soundcloud_homepage = false
     end
-    Rails.logger.warn("#{rss_url} is a soundcloud_homepage") if is_soundcloud_homepage
+    Rails.logger.warn("                         #{rss_url} is a soundcloud_homepage                      ") if is_soundcloud_homepage
     is_soundcloud_homepage
   end
 

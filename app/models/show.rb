@@ -106,7 +106,7 @@ class Show < ApplicationRecord
   def feed
     feed = Feedjira::Feed.parse self.data
     Rails.logger.warn(
-      "\n                          #{feed.title} is a #{feed.class}         \n"
+      "\n                          #{feed.title} is a #{feed.class} with #{feed.entries.count} items         \n"
     )
     feed
   end

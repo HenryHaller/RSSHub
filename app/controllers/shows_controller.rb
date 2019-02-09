@@ -57,6 +57,11 @@ class ShowsController < ApplicationController
   end
 
   def set_show
-    @show = Show.find(params[:id])
+    if Show.exists?(params[:id])
+      @show = Show.find(params[:id])
+    else
+      redirect_to episodes_path
+      return
+    end
   end
 end
