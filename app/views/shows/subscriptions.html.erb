@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="subscriptions-title">
+<div class="subscriptions">
+  <div class="subscriptions-title black">
     <h3>URLs for your subscriptions -- <a href="<%= subscriptions_path %>.csv">CSV</a></h2>
   </div>
   <%= render partial: "shared/subscription", collection: @shows, cached: true, as: :show %>

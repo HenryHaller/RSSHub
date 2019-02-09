@@ -27,7 +27,7 @@ class ShowsController < ApplicationController
 
   def destroy
     DeleteRequest.call(show: @show, current_user: current_user)
-    flash[:notice] = "Unsubscribed from #{@show.title} at #{@show.rss_url}."
+    flash[:notice] = "Unsubscribed from #{@show.title}."
     redirect_back fallback_location: episodes_path
   end
 

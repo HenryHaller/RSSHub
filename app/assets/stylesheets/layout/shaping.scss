@@ -13,11 +13,6 @@
   width: 100%;
 }
 
-.show-icon-box {
-  img {
-    height: 4em;
-  }
-}
 
 .main {
   padding: 0 6vw;
@@ -47,4 +42,20 @@
   width: 50vw;
   height: 45vh;
   border-radius: 50%;
+}
+
+img.icon {
+  height: 4em;
+}
+
+.subscriptions, .subscriptions-title {
+  width: 100vw;
+}
+
+.subscription {
+  width: 80%;
+}
+
+.icon-title {
+  width: 50%;
 }

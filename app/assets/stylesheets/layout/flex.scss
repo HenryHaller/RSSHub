@@ -30,6 +30,18 @@
   @include flex($direction: column, $justify: space-between)
 }
 
-.alert, .alert-box {
+.alert, .alert-box, .subscriptions-title {
   @include flex;
+}
+
+.subscription {
+  @include flex($justify: space-between);
+}
+
+.subscriptions {
+  @include flex($direction: column);
+}
+
+.icon-title {
+  @include flex($justify: space-between);
 }

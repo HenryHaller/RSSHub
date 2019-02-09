@@ -8,6 +8,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem "devise"
 gem 'responders', git: 'https://github.com/plataformatec/responders'
 
+gem 'vanilla-ujs' # vanilla javascript replacement for jquery ujs
+
 
 gem "jbuilder", "~> 2.0"
 gem 'pg', '>= 0.18', '< 2.0'

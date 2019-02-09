@@ -8,9 +8,9 @@
   </div>
   <div class="show-icon-box">
     <% if episode.show.show_img %>
-      <%= image_tag episode.show.show_img, onerror: "this.onerror=null;this.src='images/mp3.svg';" %>
+      <%= image_tag episode.show.show_img, onerror: "this.onerror=null;this.src='images/mp3.svg';", class: "icon" %>
     <% else %>
-      <%= image_tag 'mp3.svg' %>
+      <%= image_tag 'mp3.svg', class: "icon" %>
     <% end %>
   </div>
 </div>
