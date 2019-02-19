@@ -1,26 +1,35 @@
 <% cache [@episodes, @shows] do %>
-  <div class="primary-grid primary-container">
-    <div class="black"></div>
-    <div class="header">
-        <h4>Latest Episodes</h4>
+  <div class="main">
+    <div class="a-block">
+      Latest Episodes
     </div>
-    <div class="logout-box">
-      <%= link_to("Logout #{current_user.email}", destroy_user_session_path) %>
-    </div>
-    <div class="main">
+    <div class="b-block">
       <%= render partial: 'episodes/episode', collection: @episodes, cached: true %>
     </div>
-    <div class="sidebar">
+    <div class="c-block">
+      <%= link_to("Logout #{current_user.email}", destroy_user_session_path) %>
       <%= render partial: 'shared/manage_shows', locals: {shows: @shows} %>
     </div>
-<!--     <div class="footer">
+    <div class="d-block">
       <div>
         <p>
                 Icon made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro" target="_blank">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0.</a>
         </p>
       </div>
     </div>
- -->  </div>
-
+<!--     <div class="black"></div>
+    <div class="header">
+        <h4>Latest Episodes</h4>
+    </div>
+    <div class="logout-box">
+    </div>
+    <div class="main">
+    </div>
+    <div class="sidebar">
+    </div>
+    <div class="footer">
+    </div>
+  </div>
+ -->
 
 <% end %>
