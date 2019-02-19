@@ -1,5 +1,47 @@
-.episode {
-  img {
-    height: 48px;
+.b-block {
+  width: 100vw;
+  .episode {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 6fr 2fr;
+    grid-template-rows: 1fr;
+    margin: 2.5vh 0;
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      font-weight: bold;
+    }
+    .title {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      p {
+        color: $link-color;
+        text-align: center;
+        width: 60vw;
+        font-family: $title-font;
+        margin: 0;
+      }
+    }
+
+    .thumbnail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      img {
+        height: 64px;
+      }
+    }
+
   }
 }

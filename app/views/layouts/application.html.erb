@@ -13,11 +13,11 @@
     <%#= javascript_pack_tag 'application' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
-  <body>
+  <body class="background">
     <%#= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 
     <%= yield %>
-    <div class="background"></div>
+    <!-- <div class="background"></div> -->
   </body>
 </html>

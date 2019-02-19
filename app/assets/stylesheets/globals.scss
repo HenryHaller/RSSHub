@@ -1,12 +1,17 @@
 $background-lighter: #0B3337;
 $background-darker: #13262F;
-$text-color: #D3CBBB;
+$link-color: #D3CBBB;
+$text-color: white;
+$background-color: black;
 //https://coolors.co/73683b-0b3337-13262f-d3cbbb-e9e6ff
 
 @import url('https://fonts.googleapis.com/css?family=News+Cycle');
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+
 $body-font: 'Fira Sans', sans-serif;
 $headers-font: 'News Cycle', sans-serif;
+$title-font: 'Cutive Mono', 'monospace';
 
 h1, h2, h3, h4 {
   font-family: $headers-font;

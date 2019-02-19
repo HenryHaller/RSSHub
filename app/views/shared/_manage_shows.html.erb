@@ -1,37 +1,35 @@
-<div class="sidebar-content">
-  <h4>
-    Manage Shows
-  </h2>
+  <h3>
+    Current Subscriptions
+  </h3>
+  <div class="shows">
+    <% @shows.each do |show| %>
+    <div class="show">
+      <%= link_to show.title, show_path(show), class: "show-title" %>
+      <%= link_to "✖", show_path(show), method: :delete, class: "show-delete"%>
+    </div>
+    <%# raise %>
+    <% end %>
+  </div>
+  <h3>
+    Add A Show
+  </h3>
 
-  <%= simple_form_for @show do |f| %>
-    <%= f.input :rss_url, label: "RSS Feed or SoundCloud Homepage" %>
-    <% if @show.errors.any? %>
+  <% if @show.errors.any? %>
     <div class="errors-container">
       <ul>
         <% @show.errors.each do |error| %>
-        <% if error == :retrieve_data %>
-        <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
-        <% elsif error == :parse_data %>
-        <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
-        <% end %>
+          <% if error == :retrieve_data %>
+          <li>We couldn't retrieve any data from that location. Are you sure you submitted a valid URL?</li>
+          <% elsif error == :parse_data %>
+          <li>We couldn't parse any podcast data from that location. Are you sure you submitted a valid URL?</li>
+          <% end %>
       </ul>
     </div>
-    <% end %>
-    <% end %>
-    <%= f.submit "Subscribe", class: "submit" %>
+  <% end %>
   <% end %>
 
-  <div class="manage-shows">
-    <% @shows.each do |show| %>
-      <div class="manage-show">
-        <div><%= link_to show.title, show_path(show) %></div>
-        <div><%= link_to "Delete", show_path(show), method: :delete %></div>
-      </div>
-      <%# raise %>
-    <% end %>
-  </div>
 
-
-  <%= link_to "Subscribed URLs", subscriptions_path %>
-
-</div>
+  <%= simple_form_for @show do |f| %>
+  <%= f.input :rss_url, label: "RSS Feed or SoundCloud Homepage" %>
+  <%= f.submit "Subscribe", class: "submit" %>
+  <% end %>
