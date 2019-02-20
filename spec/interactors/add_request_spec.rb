@@ -1,7 +1,7 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-RSpec.describe ProcessAddRequest, type: :interactor do
-  describe '.call' do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-end
+# RSpec.describe ProcessAddRequest, type: :interactor do
+#   describe '.call' do
+#     pending "add some examples to (or delete) #{__FILE__}"
+#   end
+# end

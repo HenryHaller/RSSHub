@@ -9,6 +9,7 @@ gem "devise"
 gem 'responders', git: 'https://github.com/plataformatec/responders'
 
 gem 'vanilla-ujs' # vanilla javascript replacement for jquery ujs
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 
 gem "jbuilder", "~> 2.0"
@@ -52,4 +53,12 @@ group :development, :test do
   gem "selenium-webdriver"
   gem "chromedriver-helper"
   gem "launchy"
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.8'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
