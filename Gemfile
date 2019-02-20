@@ -5,11 +5,11 @@ gem 'rails', '~> 6.0.0.beta1'
 gem 'sendgrid-actionmailer'
 
 gem 'bootsnap', '>= 1.1.0', require: false
-gem "devise"
-gem 'responders', git: 'https://github.com/plataformatec/responders'
+# gem "devise"
+# gem 'responders', git: 'https://github.com/plataformatec/responders'
 
-gem 'vanilla-ujs' # vanilla javascript replacement for jquery ujs
-gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+# gem 'vanilla-ujs' # vanilla javascript replacement for jquery ujs
+gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 
 
 gem "jbuilder", "~> 2.0"
@@ -17,19 +17,19 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem "puma"
 gem "redis"
 
-gem "autoprefixer-rails"
-gem 'sassc-rails'
-gem "simple_form"
+# gem "autoprefixer-rails"
+# gem 'sassc-rails'
+# gem "simple_form"
 gem "uglifier"
-gem 'webpacker', '>= 4.0.0.rc.3'
+# gem 'webpacker', '>= 4.0.0.rc.3'
 # gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
 
-gem "csv"
+# gem "csv"
 
 gem "active_model_serializers", "~> 0.10.0"
 
-gem "interactor", "~> 3.0"
-gem "interactor-rails", "~> 2.0", git: "https://github.com/HenryHaller/interactor-rails"
+# gem "interactor", "~> 3.0"
+# gem "interactor-rails", "~> 2.0", git: "https://github.com/HenryHaller/interactor-rails"
 
 gem "authtrail"
 gem "maxminddb" # some kind of lightweight geocoder

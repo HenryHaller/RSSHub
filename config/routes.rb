@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   root to: 'pages#home'
   resources :shows, only: %i[index show new create destroy]
   resources :episodes, only: [:index]

@@ -1,67 +1,57 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: %i[show destroy]
+  include Response
+  include ExceptionHandler
 
-  def create
-    result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
-    flash[:notice] = result.user_reply
-    if result.parseable
-      current_user.touch
-      redirect_to episodes_path
-    else
-      @show = result.show
-      @episodes = current_user.episodes.includes(:show).order(pub_date: :desc).limit(20)
-      @shows = current_user.shows
-      render "episodes/index"
-    end
-  end
 
   def index
-    redirect_to episodes_path
+    @shows = Show.all
+    json_response(@shows)
+  end
+
+  def create
+    @show = Show.create!(show_params)
+    json_response(@show, :created)
+
+    # result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)
+    # flash[:notice] = result.user_reply
+    # if result.parseable
+    #   current_user.touch
+    #   redirect_to episodes_path
+    # else
+    #   @show = result.show
+    #   @episodes = current_user.episodes.includes(:show).order(pub_date: :desc).limit(20)
+    #   @shows = current_user.shows
+    #   render "episodes/index"
+    # end
   end
 
   def show
-    # @show is still set normally by the set_show method
-    @episodes = @show.from_newest_to_oldest_episodes
-    @shows = current_user.shows
+    json_response(@show)
   end
+
+
+  # def show
+  #   # @show is still set normally by the set_show method
+  #   @episodes = @show.from_newest_to_oldest_episodes
+  #   @shows = current_user.shows
+  # end
 
   def destroy
-    DeleteRequest.call(show: @show, current_user: current_user)
-    flash[:notice] = "Unsubscribed from #{@show.title}."
-    redirect_back fallback_location: episodes_path
+    @show.destroy
+    head :no_content
   end
 
-  def subscriptions
-    @shows = current_user.shows
-    respond_to do |format|
-      format.html
-      format.csv { render plain: csv }
-    end
-  end
-
-  def csv
-    CSV.generate do |csv|
-      csv << ["Title", "URL"]
-      @shows.each do |show|
-        csv << [show.title, show.rss_url]
-      end
-    end
-  end
 
 
   private
 
 
   def show_params
-    params.require(:show).permit(:rss_url)
+    params.permit(:rss_url)
   end
 
   def set_show
-    if Show.exists?(params[:id])
-      @show = Show.find(params[:id])
-    else
-      redirect_to episodes_path
-      return
-    end
+    @show = Show.find(params[:id])
   end
 end
