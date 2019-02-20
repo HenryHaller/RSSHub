@@ -46,12 +46,12 @@ RSpec.describe "Shows API", type: :request do
   end
 
   describe 'POST /shows' do
-    let(:valid_attributes) { { rss_url: "https://soundcloud.com/chapo-trap-house" } }
+    let(:valid_attributes) { { rss_url: "http://localhost:3001/items.rss" } }
     context 'when the request is valid' do
       before { post '/shows', params: valid_attributes}
 
       it 'creates a show' do
-        expect(json['rss_url']).to eq("https://soundcloud.com/chapo-trap-house")
+        expect(json['rss_url']).to eq("http://localhost:3001/items.rss")
       end
 
       it 'returns status code 201' do
