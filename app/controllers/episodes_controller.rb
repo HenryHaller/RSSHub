@@ -6,7 +6,7 @@ class EpisodesController < ApplicationController
     json_response(@episodes)
   end
 
-  private
+  # private
 
   # def show_params
   #   params.require(:show).permit(:rss_url)
