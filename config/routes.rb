@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
-  resources :shows, only: %i[index show new create destroy]
-  resources :episodes, only: [:index]
+
+  scope module: :v1, constraints: ApiVersion.new('v1', true) do
+    resources :shows, only: %i[index show new create destroy]
+    resources :episodes, only: [:index]
+  end
   scope :admin do
     get 'panel', to: 'admin#panel'
   end
