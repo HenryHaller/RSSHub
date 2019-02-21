@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+  post 'auth/login', to: 'authentication#authenticate'
+  post 'signup', to: 'users#create'
   resources :shows, only: %i[index show new create destroy]
   resources :episodes, only: [:index]
   scope :admin do

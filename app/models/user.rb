@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :login_activities, as: :user # use :user no matter what your model name
   validates :email, presence: true
-  validates :password_digest, presence: true
+  validates :password, presence: true
 
   enum role: {
     user: 0,
