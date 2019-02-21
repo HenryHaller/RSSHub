@@ -5,9 +5,11 @@ RSpec.describe 'Episodes API' do
   let!(:show) { create(:show, users: [user]) }
   let!(:episodes) { create_list(:episode, 5, show: show)}
   let(:show_id) { show.id }
+  let(:headers) { valid_headers }
+
 
   describe "GET /episodes" do
-    before { get "/episodes/" }
+    before { get "/episodes/", headers: headers }
 
     context "We Can Get Episodes" do
       it 'returns status code 200' do

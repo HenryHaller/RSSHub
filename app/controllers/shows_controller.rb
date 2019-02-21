@@ -1,16 +1,13 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: %i[show destroy]
-  include Response
-  include ExceptionHandler
-
 
   def index
-    @shows = Show.all
+    @shows = current_user.shows
     json_response(@shows)
   end
 
   def create
-    @show = Show.create!(show_params)
+    @show = current_user.shows.create!(show_params)
     json_response(@show, :created)
 
     # result = AddRequest.call(rss_url: show_params[:rss_url], user_id: current_user.id)

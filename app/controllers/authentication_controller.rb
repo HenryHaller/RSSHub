@@ -1,9 +1,7 @@
 # app/controllers/authentication_controller.rb
 class AuthenticationController < ApplicationController
   # return auth token once user is authenticated
-  include Response
-  include ExceptionHandler
-
+  skip_before_action :authorize_request, only: :authenticate
   def authenticate
     auth_token =
       AuthenticateUser.new(auth_params[:email], auth_params[:password]).call

@@ -6,8 +6,10 @@ RSpec.describe "Shows API", type: :request do
   let!(:shows) { create_list(:show, 2, users: [user]) }
   let(:show_id) { shows.first.id }
 
+  let(:headers) { valid_headers }
+
   describe 'GET /shows/' do
-    before { get '/shows' }
+    before { get '/shows', headers: headers }
     it 'returns shows' do
       expect(json).not_to be_empty
       expect(json.size).to eq(2)
@@ -19,7 +21,7 @@ RSpec.describe "Shows API", type: :request do
   end
 
   describe 'GET /shows/:id' do
-    before { get "/shows/#{show_id}" }
+    before { get "/shows/#{show_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns the show' do
@@ -48,9 +50,9 @@ RSpec.describe "Shows API", type: :request do
   end
 
   describe 'POST /shows' do
-    let(:valid_attributes) { { rss_url: "http://localhost:3001/items.rss" } }
+    let(:valid_attributes) { { rss_url: "http://localhost:3001/items.rss" }.to_json }
     context 'when the request is valid' do
-      before { post '/shows', params: valid_attributes}
+      before { post '/shows', headers: headers, params: valid_attributes}
 
       it 'creates a show' do
         expect(json['rss_url']).to eq("http://localhost:3001/items.rss")
@@ -62,7 +64,7 @@ RSpec.describe "Shows API", type: :request do
     end
 
     context 'when the request is invalid' do
-      before {post '/shows', params: {rss_url: "asdf"}}
+      before {post '/shows',  headers: headers, params: {rss_url: "asdf"}.to_json}
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -74,7 +76,7 @@ RSpec.describe "Shows API", type: :request do
   end
 
   describe 'DELETE /shows/:id' do
-    before { delete "/shows/#{show_id}" }
+    before { delete "/shows/#{show_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
