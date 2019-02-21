@@ -4,7 +4,12 @@ module UrlSmarts
   extend ActiveSupport::Concern
   included do
     def looks_like_rss_feed?
-      uri = URI(self.rss_url)
+      begin
+        uri = URI(self.rss_url)
+      rescue URI::InvalidURIError
+        errors.add(:parsing_failure, "Parsing Failure")
+        return false
+      end
       if %w[http https].include? uri.scheme
         valid = true
       else

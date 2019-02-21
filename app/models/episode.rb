@@ -1,6 +1,7 @@
 class Episode < ApplicationRecord
   belongs_to :show, touch: true
-  validates :title, presence: true, uniqueness: { scope: :show }
+  validates :title, presence: true
+  validates :title, uniqueness: { scope: :show }
   def safe_title
     t = title
     t.tr!("'", "")

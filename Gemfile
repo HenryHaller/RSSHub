@@ -17,6 +17,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem "puma"
 gem "redis"
 
+gem "bcrypt"
+
+gem 'jwt'
+
 # gem "autoprefixer-rails"
 # gem 'sassc-rails'
 # gem "simple_form"

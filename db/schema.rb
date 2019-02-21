@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_130540) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0

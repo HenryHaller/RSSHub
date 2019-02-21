@@ -1,13 +1,15 @@
 require "episode_access_module"
 
 class User < ApplicationRecord
-  include EpisodeAccessModule
+  has_secure_password
   has_and_belongs_to_many :shows
-  # has_many :episodes, through: :shows
+  has_many :episodes, through: :shows
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   has_many :login_activities, as: :user # use :user no matter what your model name
+  validates :email, presence: true
+  validates :password_digest, presence: true
 
   enum role: {
     user: 0,

@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
+      t.string :password_digest
 
       ## Recoverable
 
