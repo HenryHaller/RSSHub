@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Shows API", type: :request do
-  let!(:shows) { create_list(:show, 2) }
+  let!(:user) { create(:user) }
+  # let!(:shows) { create_list(:show, 2) }
+  let!(:shows) { create_list(:show, 2, users: [user]) }
   let(:show_id) { shows.first.id }
 
   describe 'GET /shows/' do

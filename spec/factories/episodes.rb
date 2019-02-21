@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :episode do
     title { Faker:: Lorem.word }
-    association show, factory: :show
+    association :show
   end
 end

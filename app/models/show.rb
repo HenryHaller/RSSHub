@@ -10,7 +10,7 @@ class Show < ApplicationRecord
   # validate :can_open_url?, :can_parse_data?, on: :create
   # after_create :set_self_metadata, :update_eipsodes
   has_many :episodes, dependent: :destroy
-  # has_and_belongs_to_many :users
+  has_and_belongs_to_many :users
 
   # def episodes_from_newest_to_oldest(limit = nil)
   #   episodes = self.episodes.order(pub_date: :desc)
