@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Aware of new Episodes" do
   let!(:user) { create(:user) }
-  let!(:show) { create(:show, users: [user], rss_url: "http://localhost:3000/items.rss") }
+  let!(:show) { create(:show, users: [user], rss_url: "http://localhost:3001/items/") }
+  let!(:title) { "Show created #{Time.now}"}
   let(:headers) { valid_headers }
 
   describe "User Checks Feed" do
@@ -19,23 +20,26 @@ RSpec.describe "Aware of new Episodes" do
     end
 
     context 'publish new episode' do
-      before { HTTP.post "http://localhost:3001/items" }
+      before { HTTP.post "http://localhost:3001/items", params: { title: title} }
 
       context 'scrape new episode' do
         before { UpdateShowsJob.perform_now }
 
         context 'User re-checks feed. New episode is present' do
           before { get "/episodes/", headers: headers}
-          before { @second_count = json.size }
+          # before { @second_count = json.size }
+
+          it 'has more episodes than it did before' do
+            expect(json.size).to be > @initial_count
+          end
 
           it 'returns status code 200' do
             expect(response).to have_http_status(200)
           end
 
-          it 'second count is initial count + 1' do
-            expect(@second_count).to eq(@initial_count + 1)
+          it 'highest show title is our expected title' do
+            expect(json.first["title"]).to eq(title)
           end
-
         end
       end
     end

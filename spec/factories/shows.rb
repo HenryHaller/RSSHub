@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :show do
     title { Faker::Lorem.word }
-    rss_url { "http://#{Faker::Alphanumeric.alpha 10}.com" }
+    rss_url { "http://localhost:3001/items/" }
     association :users
   end
 end

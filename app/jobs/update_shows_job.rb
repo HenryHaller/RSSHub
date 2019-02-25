@@ -1,9 +1,9 @@
 class UpdateShowsJob < ApplicationJob
   queue_as :default
 
-  def perform(force = false, *args)
-    Show.all.each { |show| show.fetch_show_data } if force
-    Show.all.each { |show| show.update_episodes(false) } # first run set to false
+  def perform(*args)
+    # Show.all.each { |show| show.update_episodes} # first run set to false
+    Show.all.each(&:update_episodes)
     # Do something later
   end
 end
