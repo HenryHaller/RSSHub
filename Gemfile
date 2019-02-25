@@ -59,6 +59,7 @@ group :development, :test do
   gem "launchy"
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
+  gem "http"
 end
 
 group :test do
