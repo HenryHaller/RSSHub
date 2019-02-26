@@ -37,6 +37,7 @@ class Show < ApplicationRecord
     # puts "updating past episodes for #{self.title}" if self.title if Rails.env == "development" || "test"
     self.fetch_show_data
     self.save
+    self.set_self_metadata
     show_updated = false
     feed = self.feed
     feed.entries.each do |episode|

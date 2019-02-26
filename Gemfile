@@ -4,6 +4,8 @@ gem 'rails', '~> 6.0.0.beta1'
 
 gem 'sendgrid-actionmailer'
 
+gem 'rack-cors', require: 'rack/cors'
+
 gem 'bootsnap', '>= 1.1.0', require: false
 # gem "devise"
 # gem 'responders', git: 'https://github.com/plataformatec/responders'

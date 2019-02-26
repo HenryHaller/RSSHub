@@ -14,6 +14,13 @@ module RSSHub
           generate.test_framework  :test_unit, fixture: false
         end
     # Initialize configuration defaults for originally generated Rails version.
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:8080'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
+
     config.load_defaults 5.2
 
     # Settings in config/environments/* take precedence over those specified here.
