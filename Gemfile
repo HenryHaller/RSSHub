@@ -24,7 +24,7 @@ gem "bcrypt"
 gem 'jwt'
 
 # gem "autoprefixer-rails"
-# gem 'sassc-rails'
+gem 'sassc-rails'
 # gem "simple_form"
 gem "uglifier"
 gem 'webpacker', '>= 4.0.0.rc.3'
