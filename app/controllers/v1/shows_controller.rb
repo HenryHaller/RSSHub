@@ -10,7 +10,7 @@ module V1
     def create
       @show = current_user.shows.create!(show_params)
       @show.update_episodes
-      json_response(@show, :created)
+      json_response(nil, :created)
     end
 
     def show
