@@ -36,10 +36,10 @@ default: &default
   extensions:
     - .mjs
     - .js
-    - .sass
+    # - .sass
     - .scss
     - .css
-    - .module.sass
+    # - .module.sass
     - .module.scss
     - .module.css
     - .png
@@ -70,10 +70,9 @@ development:
     use_local_ip: false
     quiet: false
     headers:
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     watch_options:
-      ignored: '**/node_modules/**'
-
+      ignored: "**/node_modules/**"
 
 test:
   <<: *default
