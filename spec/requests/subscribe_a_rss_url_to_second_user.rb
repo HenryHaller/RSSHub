@@ -42,6 +42,10 @@ RSpec.describe "System works when subscribing a url to second user" do
                 it 'user model2 has 1 show' do
                     expect(user2.shows.count).to eq(1)
                 end
+
+                it 'user model1.shows == user model2.shows' do
+                    expect(user1.shows).to eq(user2.shows)
+                end
                 
                 it 'the system should only have 1 show' do
                     expect(Show.count).to eq(1)
