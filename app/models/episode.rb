@@ -5,7 +5,7 @@ class Episode < ApplicationRecord
 
   def as_json(options)
     json = super
-    json["show-title"] = show.title
+    json["show_title"] = show.title
     json
   end
 
