@@ -8,8 +8,13 @@ module V1
     end
 
     def create
-      @show = current_user.shows.create!(show_params)
-      @show.update_episodes
+      @show = Show.find_by(show_params)
+      if @show.nil?
+        @show = current_user.shows.create!(show_params)
+        @show.update_episodes
+      else
+        current_user.shows << @show
+      end
       json_response(nil, :created)
     end
 
