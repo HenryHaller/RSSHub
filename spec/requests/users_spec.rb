@@ -11,7 +11,10 @@ RSpec.describe 'Users API', type: :request do
   # User signup test suite
   describe 'POST /signup' do
     context 'when valid request' do
-      before { post '/signup', params: valid_attributes.to_json, headers: headers }
+      before do
+         post '/signup', params: valid_attributes.to_json, headers: headers
+         @email = ActionMailer::Base.deliveries.last
+      end
 
       it 'creates a new user' do
         expect(response).to have_http_status(201)
@@ -23,6 +26,10 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns an authentication token' do
         expect(json['auth_token']).not_to be_nil
+      end
+
+      it 'email message thanks them for registering' do
+        expect(@email.body).to match(/<h1>Thank You for registering/)
       end
     end
 
