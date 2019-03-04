@@ -23,7 +23,8 @@ module V1
     end
 
     def destroy
-      @show.destroy
+      current_user.shows.delete(@show)
+      @show.destroy if @show.users.count.zero?
       head :no_content
     end
 
