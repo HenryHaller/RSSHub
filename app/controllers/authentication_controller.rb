@@ -21,6 +21,11 @@ class AuthenticationController < ApplicationController
     response = PasswordRecoveryAttempt.new(auth_params[:email], auth_params[:recovery_token], auth_params[:new_password]).call
     json_response(response)
   end
+
+  def update_password
+    response = UpdatePassword.new(auth_params[:email], auth_params[:new_password]).call
+    json_response(response)
+  end
   private
 
   def auth_params
