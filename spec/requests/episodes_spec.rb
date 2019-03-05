@@ -22,7 +22,7 @@ RSpec.describe 'Episodes API' do
       
       it 'every episode has a show title' do
         json.each do |episode|
-          expect(episode["show-title"]).to be_a(String)
+          expect(episode["show_title"]).to be_a(String)
         end
       end
     end

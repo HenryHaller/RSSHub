@@ -60,11 +60,11 @@ group :development, :test do
   gem "chromedriver-helper"
   gem "launchy"
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.8'
   gem "http"
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'database_cleaner'

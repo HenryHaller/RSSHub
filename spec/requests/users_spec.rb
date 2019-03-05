@@ -1,6 +1,7 @@
 # spec/requests/users_spec.rb
 require 'rails_helper'
 
+
 RSpec.describe 'Users API', type: :request do
   let(:user) { build(:user) }
   let(:headers) { valid_headers.except('Authorization') }
@@ -13,7 +14,13 @@ RSpec.describe 'Users API', type: :request do
     context 'when valid request' do
       before do
          post '/signup', params: valid_attributes.to_json, headers: headers
-         @email = ActionMailer::Base.deliveries.last
+         @email_body = ActionMailer::Base.deliveries.last.body
+         @activation_link = @email_body.match(/account <a href="([^"]*)"/).captures.first
+         @activation_token = @activation_link.match(/token=([^&]*)&/).captures.first
+         @activation_email = @activation_link.match(/email=(.*)/).captures.first
+        #  puts @activation_link
+        #  puts @activation_email
+        #  puts @activation_token
       end
 
       it 'creates a new user' do
@@ -29,7 +36,19 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'email message thanks them for registering' do
-        expect(@email.body).to match(/<h1>Thank You for registering/)
+        expect(@email_body).to match(/<h1>Thank You for registering/)
+      end
+
+      context 'activate the new user' do
+        before { get "/auth/activate?activation_token=#{@activation_token}&email=#{@activation_email}" }
+
+        it 'gets OK response' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'has OK message' do
+          expect(response.message).to eq("OK")
+        end
       end
     end
 

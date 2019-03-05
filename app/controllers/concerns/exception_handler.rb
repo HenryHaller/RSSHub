@@ -5,6 +5,8 @@ module ExceptionHandler
   class AuthenticationError < StandardError; end
   class MissingToken < StandardError; end
   class InvalidToken < StandardError; end
+  class ActivationError < StandardError; end
+  class AlreadyActivatedError < StandardError; end
 
   included do
     # Define custom handlers
@@ -12,6 +14,8 @@ module ExceptionHandler
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
+    rescue_from ExceptionHandler::ActivationError, with: :unauthorized_request
+    rescue_from ExceptionHandler::AlreadyActivatedError, with: :four_twenty_two
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       json_response({ message: e.message }, :not_found)

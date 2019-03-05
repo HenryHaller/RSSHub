@@ -7,6 +7,7 @@ class AuthenticateUser
 
   # Service entry point
   def call
+    user = authenticate
     JsonWebToken.encode(user_id: user.id, user_email: user.email) if user
   end
 
@@ -15,7 +16,7 @@ class AuthenticateUser
   attr_reader :email, :password
 
   # verify user credentials
-  def user
+  def authenticate
     user = User.find_by(email: email)
     return user if user&.authenticate(password)
 

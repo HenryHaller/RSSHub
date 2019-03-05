@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
+  get 'auth/activate', to: 'authentication#activate'
 
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     resources :shows, only: %i[index show new create destroy]
