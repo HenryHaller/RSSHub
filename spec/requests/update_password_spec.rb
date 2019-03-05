@@ -1,5 +1,27 @@
 require 'rails_helper'
 
+
+RSpec.describe "Password change fails when done wrong" do
+  let!(:user) { create(:user) }
+  let(:headers) { valid_headers }
+  context 'user changes password without including old password' do
+    before do
+      post "/auth/update_password", params: { new_password: "asdfasdfasdf", email: user.email }.to_json, headers: valid_headers
+    end
+
+    it 'response is 401' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'has message old password missing' do
+      expect(response.body).to match(/Current Password Missing/)
+    end
+  end
+
+
+end
+
+
 RSpec.describe "User can change password" do
   let!(:user) { create(:user) }
   let(:headers) { valid_headers }
@@ -15,7 +37,7 @@ RSpec.describe "User can change password" do
 
     context 'user changes password' do
       before do
-        post "/auth/update_password", params: { new_password: "asdfasdfasdf", email: user.email }.to_json, headers: valid_headers
+        post "/auth/update_password", params: { current_password: "password", new_password: "asdfasdfasdf", email: user.email }.to_json, headers: valid_headers
       end
 
       it 'response is 200' do
