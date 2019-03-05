@@ -10,11 +10,11 @@ RSpec.describe "Password change fails when done wrong" do
     end
 
     it 'response is 401' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(401)
     end
 
     it 'has message old password missing' do
-      expect(response.body).to match(/Current Password Missing/)
+      expect(response.body).to match(/Invalid credentials/)
     end
   end
 

@@ -23,12 +23,13 @@ class AuthenticationController < ApplicationController
   end
 
   def update_password
-    response = UpdatePassword.new(auth_params[:email], auth_params[:new_password]).call
+    response = UpdatePassword.new(auth_params[:email], auth_params[:new_password], auth_params[:current_password]).call
     json_response(response)
   end
+
   private
 
   def auth_params
-    params.permit(:email, :password, :activation_token, :recovery_token, :new_password)
+    params.permit(:email, :password, :activation_token, :recovery_token, :new_password, :current_password)
   end
 end
