@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :login_activities, as: :user # use :user no matter what your model name
   validates :email, presence: true
-  validates :password, presence: true
+  # validates :password, presence: true
 
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token
@@ -34,6 +34,10 @@ def check_activation_token(activation_token)
   BCrypt::Password.new(activation_digest).is_password?(activation_token)
 end
 
+def check_reset_token(reset_token)
+  BCrypt::Password.new(reset_digest).is_password?(reset_token)
+end
+
 # Returns the hash digest of the given string.
 def User.digest(string)
   cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -44,6 +48,17 @@ end
 # Returns a random token.
 def User.new_token
   SecureRandom.urlsafe_base64
+end
+
+def send_password_reset_email(reset_token)
+  UserMailer.with(reset_token: reset_token, email: self.email).password_reset.deliver_now
+end
+
+def create_reset_token
+  reset_token = User.new_token
+  self.reset_digest = User.digest(reset_token)
+  puts self.errors.messages unless self.save
+  reset_token
 end
 
 private

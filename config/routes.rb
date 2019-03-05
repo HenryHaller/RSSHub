@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
   get 'auth/activate', to: 'authentication#activate'
+  post 'auth/password_recovery_request', to: "authentication#password_recovery_request"
+  post 'auth/password_recovery_attempt', to: "authentication#password_recovery_attempt"
 
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     resources :shows, only: %i[index show new create destroy]

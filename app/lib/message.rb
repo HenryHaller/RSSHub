@@ -35,5 +35,9 @@ class Message
   def self.account_already_activated
     'This account is already active'
   end
+
+  def self.invalid_recovery_token
+    'This recovery token is invalid'
+  end
 end
 
