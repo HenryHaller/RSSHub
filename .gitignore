@@ -27,3 +27,4 @@ yarn-debug.log*
 /config/master.key
 
 .test.sh
+spec/examples.txt
