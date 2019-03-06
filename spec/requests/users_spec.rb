@@ -23,6 +23,8 @@ RSpec.describe 'Users API', type: :request do
         #  puts @activation_token
       end
 
+      #TO DO: add authentication failure mode for pending activation
+
       it 'creates a new user' do
         expect(response).to have_http_status(201)
       end

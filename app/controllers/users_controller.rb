@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     UserMailer.with(email: user_params[:email], activation_token: user.activation_token).please_authenticate.deliver_now
-    auth_token = AuthenticateUser.new(user.email, user.password).call
-    response = { message: Message.account_created, auth_token: auth_token }
+    # auth_token = AuthenticateUser.new(user.email, user.password).call
+    response = { message: Message.account_created }
     json_response(response, :created)
   end
 

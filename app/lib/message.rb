@@ -39,5 +39,9 @@ class Message
   def self.invalid_recovery_token
     'This recovery token is invalid'
   end
+
+  def self.inactive_user
+    'This user needs to be activated first.'
+  end
 end
 

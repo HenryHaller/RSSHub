@@ -17,7 +17,7 @@ class PasswordRecoveryAttempt
     user = User.find_by(email: email)
     if user && user.check_reset_token(recovery_token)
       user.password = new_password
-      puts user.errors.messages unless user.save
+      Rails.logger.warn(user.errors.messages) unless user.save
       {message: "Password updated"}
     else
       raise(ExceptionHandler::InvalidRecoveryTokenError, Message.invalid_recovery_token)

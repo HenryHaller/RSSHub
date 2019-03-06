@@ -1,7 +1,7 @@
 # app/controllers/authentication_controller.rb
 class AuthenticationController < ApplicationController
   # return auth token once user is authenticated
-  skip_before_action :authorize_request, only: %i[authenticate activate]
+  skip_before_action :authorize_request, only: %i[authenticate activate password_recovery_attempt password_recovery_request]
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
     json_response(auth_token: auth_token)

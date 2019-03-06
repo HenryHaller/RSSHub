@@ -12,6 +12,7 @@ class PasswordRecoveryRequest
   attr_reader :email
   
   def response
+    Rails.logger.warn(email)
     user = User.find_by(email: email)
     if user
       reset_token = user.create_reset_token
