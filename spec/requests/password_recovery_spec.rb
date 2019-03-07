@@ -69,7 +69,7 @@ RSpec.describe "User can recover password" do
         end
         
         it 'response is 200' do
-          puts response.body
+          # puts response.body
           expect(response).to have_http_status(200)
         end
       end
