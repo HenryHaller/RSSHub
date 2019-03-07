@@ -13,11 +13,11 @@ class UpdatePassword
 
   attr_reader :email, :new_password, :current_password
   def response
-    puts current_password
+    # puts current_password
     user = User.find_by(email: email)
     if user&.authenticate(current_password)
       user.password = new_password
-      puts user.errors.messages unless user.save
+      Rails.logger.warn(user.errors.messages) unless user.save
       { message: "Password Updated" }
     else
       raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)

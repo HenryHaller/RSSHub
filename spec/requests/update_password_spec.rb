@@ -6,6 +6,9 @@ RSpec.describe "Password change fails when done wrong" do
   let(:headers) { valid_headers }
   context 'user changes password without including old password' do
     before do
+      user.activated = true
+      user.save
+
       post "/auth/update_password", params: { new_password: "asdfasdfasdf", email: user.email }.to_json, headers: valid_headers
     end
 
@@ -28,6 +31,9 @@ RSpec.describe "User can change password" do
 
   context 'user can login with the old password' do
     before do
+      user.activated = true
+      user.save
+
       post "/auth/login", params: { password: "password", email: user.email }.to_json, headers: {"Content-Type" => "application/json"}
     end
 

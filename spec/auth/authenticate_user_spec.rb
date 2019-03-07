@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe AuthenticateUser do
   # create test user
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   # valid request subject
   subject(:valid_auth_obj) { described_class.new(user.email, user.password) }
   # invalid request subject
@@ -11,6 +11,10 @@ RSpec.describe AuthenticateUser do
 
   # Test suite for AuthenticateUser#call
   describe '#call' do
+    before do
+      user.activated = true
+      user.save
+    end
     # return token when valid request
     context 'when valid credentials' do
       it 'returns an auth token' do

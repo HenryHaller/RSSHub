@@ -27,6 +27,10 @@ RSpec.describe 'Authentication', type: :request do
 
     # returns auth token when request is valid
     context 'When request is valid' do
+      before do
+        user.activated = true
+        user.save
+      end
       before { post '/auth/login', params: valid_credentials, headers: headers }
 
       it 'returns an authentication token' do
