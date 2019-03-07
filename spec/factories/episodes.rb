@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :episode do
-    title { Faker:: Lorem.word }
+    title { Time.now.to_a.shuffle.join }
     association :show
   end
 end
