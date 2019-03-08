@@ -23,6 +23,7 @@ class AuthenticationController < ApplicationController
   end
 
   def update_password
+    # Rails.logger.warn(auth_params)
     response = UpdatePassword.new(auth_params[:email], auth_params[:new_password], auth_params[:current_password]).call
     json_response(response)
   end

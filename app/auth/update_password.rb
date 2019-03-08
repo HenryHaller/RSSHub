@@ -15,6 +15,10 @@ class UpdatePassword
   def response
     # puts current_password
     user = User.find_by(email: email)
+    # Rails.logger.warn(email)
+    # Rails.logger.warn(new_password)
+    # Rails.logger.warn(current_password)
+    # Rails.logger.warn(user)
     if user&.authenticate(current_password)
       user.password = new_password
       Rails.logger.warn(user.errors.messages) unless user.save
