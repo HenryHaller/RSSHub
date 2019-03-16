@@ -70,7 +70,7 @@ RSpec.describe "Shows API", type: :request do
         expect(response).to have_http_status(422)
       end
       it 'returns a validation failure message' do
-        expect(response.body).to match(/This submission doesn't look like a valid url./)
+        expect(response.body).to match(/unknown scheme:/)
       end
     end
   end

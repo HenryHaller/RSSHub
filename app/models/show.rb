@@ -1,10 +1,7 @@
-require "open-uri"
+require "http"
 require "rss"
 
 class Show < ApplicationRecord
-  include UrlSmarts
-  validate :looks_like_rss_feed?
-
   validates :rss_url, uniqueness: true
   validate :can_open_url?, :can_parse_data?, on: :create
   # after_create :set_self_metadata, :update_eipsodes
@@ -17,10 +14,20 @@ class Show < ApplicationRecord
     episodes
   end
 
+  def get
+    HTTP.get(self.rss_url)
+  end
+
   def fetch_show_data
     # puts "retreiving show data for #{self.title || 'no title'} at #{self.rss_url}" if Rails.env == "development" || "test"
     begin
-      self.data = open(self.rss_url).read
+      response = get
+      if response.status == 301 # we are dealing with a redirect here
+        self.rss_url = response.headers["location"]
+        Rails.logger.warn(self.errors.messages) unless self.save
+        response = get
+      end
+      self.data = response.to_s
     rescue Errno::ECONNREFUSED => e
       puts e.message
     end

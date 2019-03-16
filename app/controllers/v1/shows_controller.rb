@@ -24,6 +24,7 @@ module V1
 
     def destroy
       current_user.shows.delete(@show)
+      current_user.touch
       @show.destroy if @show.users.count.zero?
       head :no_content
     end
