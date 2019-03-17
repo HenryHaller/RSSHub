@@ -145,7 +145,6 @@ GEM
       domain_name (~> 0.5)
     http-form_data (2.1.1)
     http_parser.rb (0.6.0)
-    httprb (0.1.5)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -369,7 +368,6 @@ DEPENDENCIES
   faker!
   feedjira
   http
-  httprb
   jbuilder (~> 2.0)
   jwt
   launchy

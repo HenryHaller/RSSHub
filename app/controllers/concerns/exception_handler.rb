@@ -20,7 +20,7 @@ module ExceptionHandler
     rescue_from ExceptionHandler::AlreadyActivatedError, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidRecoveryTokenError, with: :unauthorized_request
     rescue_from ExceptionHandler::InactiveUser, with: :four_twenty_two
-    # rescue_from HTTP::Request::UnsupportedSchemeError, with: :four_twenty_two
+    rescue_from HTTP::Request::UnsupportedSchemeError, with: :four_twenty_two
     # rescue_from ExceptionHandler::RecordNotUnique, with: :account_already_exists
     rescue_from PG::UniqueViolation, with: :account_already_exists
 

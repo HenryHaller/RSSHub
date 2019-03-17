@@ -34,7 +34,7 @@ gem 'webpacker', '>= 4.0.0.rc.3'
 
 gem "active_model_serializers", "~> 0.10.0"
 
-gem "httprb"
+gem "http"
 
 # gem "interactor", "~> 3.0"
 # gem "interactor-rails", "~> 2.0", git: "https://github.com/HenryHaller/interactor-rails"
@@ -62,7 +62,6 @@ group :development, :test do
   gem "chromedriver-helper"
   gem "launchy"
   gem 'factory_bot_rails'
-  gem "http"
 end
 
 group :test do
