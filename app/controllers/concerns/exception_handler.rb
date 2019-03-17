@@ -1,5 +1,3 @@
-require "http"
-
 module ExceptionHandler
   extend ActiveSupport::Concern
 
@@ -37,7 +35,7 @@ module ExceptionHandler
     if Rails.env == "development"
       four_twenty_two(err)
     else
-      json_response({ message: "Duplicate Key"}, :unprocessable_entity)
+      json_response({ message: "Duplicate Key" }, :unprocessable_entity)
     end
   end
 

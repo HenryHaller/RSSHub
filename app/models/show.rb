@@ -1,4 +1,3 @@
-require "http"
 require "rss"
 
 class Show < ApplicationRecord
