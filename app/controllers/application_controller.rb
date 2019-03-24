@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
+  include CustomSerializers
 
   # called before every action on controllers
   before_action :authorize_request

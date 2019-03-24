@@ -4,6 +4,7 @@ module V1
 
     def index
       @shows = current_user.shows
+      @shows = @shows.map { |show| show_serializer(show) }
       json_response(@shows)
     end
 
