@@ -9,6 +9,7 @@ module ExceptionHandler
   class AlreadyActivatedError < StandardError; end
   class InvalidRecoveryTokenError < StandardError; end
   class InactiveUser < StandardError; end
+  class BadUrl < StandardError; end
 
   included do
     # Define custom handlers
@@ -23,6 +24,7 @@ module ExceptionHandler
     rescue_from HTTP::Request::UnsupportedSchemeError, with: :four_twenty_two
     # rescue_from ExceptionHandler::RecordNotUnique, with: :account_already_exists
     rescue_from PG::UniqueViolation, with: :account_already_exists
+    rescue_from ExceptionHandler::BadUrl, with: :four_twenty_two
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       json_response({ message: e.message }, :not_found)

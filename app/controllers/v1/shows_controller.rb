@@ -9,9 +9,10 @@ module V1
     end
 
     def create
-      @show = Show.find_by(show_params)
+      url = follow_redirect(show_params[:rss_url])
+      @show = Show.find_by(rss_url: url)
       if @show.nil?
-        @show = current_user.shows.create!(show_params)
+        @show = current_user.shows.create!(rss_url: url)
         @show.update_episodes
       else
         current_user.shows << @show
