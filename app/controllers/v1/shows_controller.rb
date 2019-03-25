@@ -9,7 +9,9 @@ module V1
     end
 
     def create
-      url = follow_redirect(show_params[:rss_url])
+      url = show_params[:rss_url]
+      url = adapt_soundcloud_url(url) if soundcloud?(url)
+      url = follow_redirect(url)
       @show = Show.find_by(rss_url: url)
       if @show.nil?
         @show = current_user.shows.create!(rss_url: url)
