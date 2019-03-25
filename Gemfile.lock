@@ -373,6 +373,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   maxminddb
+  nokogiri
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails
