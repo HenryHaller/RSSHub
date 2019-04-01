@@ -34,11 +34,11 @@ module ExceptionHandler
   private
 
   def account_already_exists(err)
-    if Rails.env == "development"
-      four_twenty_two(err)
-    else
-      json_response({ message: "Duplicate Key" }, :unprocessable_entity)
-    end
+    # if Rails.env == "development"
+    #   four_twenty_two(err)
+    # else
+    json_response({ message: "Duplicate Key" }, :unprocessable_entity)
+    # end
   end
 
   # JSON response with message; Status code 422 - unprocessable entity

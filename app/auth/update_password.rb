@@ -1,6 +1,6 @@
 class UpdatePassword
-  def initialize(email, new_password, current_password)
-    @email = email
+  def initialize(user, new_password, current_password)
+    @user = user
     @new_password = new_password
     @current_password = current_password
   end
@@ -11,18 +11,17 @@ class UpdatePassword
 
   private
 
-  attr_reader :email, :new_password, :current_password
+  attr_reader :user, :new_password, :current_password
   def response
     # puts current_password
-    user = User.find_by(email: email)
+    # user = User.find_by(email: email)
     # Rails.logger.warn(email)
     # Rails.logger.warn(new_password)
     # Rails.logger.warn(current_password)
     # Rails.logger.warn(user)
-    if user&.authenticate(current_password)
+    if user.authenticate(current_password)
       user.password = new_password
-      Rails.logger.warn(user.errors.messages) unless user.save
-      { message: "Password Updated" }
+      Rails.logger.error(user.errors.messages) unless user.save
     else
       raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
     end

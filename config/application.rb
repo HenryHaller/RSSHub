@@ -14,11 +14,13 @@ module RSSHub
           generate.test_framework  :test_unit, fixture: false
         end
     # Initialize configuration defaults for originally generated Rails version.
+    config.web_console.whitelisted_ips = "150.249.192.19"
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         # origins 'localhost:8080', 'rsshub-vue.firebaseapp.com', '[a-z0-9]+.ngrok.io'
-        origins "*"
-        resource '*', headers: :any, methods: [:get, :post, :options, :delete]
+        # origins "*"
+        origins 'localhost:8080', 'rsshub.online'
+        resource '*', headers: :any, methods: [:get, :post, :options, :delete], credentials: true, expose: ['Set-cookie']
       end
     end
 

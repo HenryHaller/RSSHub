@@ -17,9 +17,8 @@ class PasswordRecoveryRequest
     if user
       reset_token = user.create_reset_token
       user.send_password_reset_email(reset_token)
-      {message: "Password Recovery Email Sent"}
     else
-      raise InvalidRecord
+      raise ActiveRecord::RecordInvalid
     end
   end
 end

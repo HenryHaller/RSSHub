@@ -1,7 +1,7 @@
 # app/auth/authorize_api_request.rb
 class AuthorizeApiRequest
-  def initialize(headers = {})
-    @headers = headers
+  def initialize(access_token)
+    @access_token = access_token
   end
 
   # Service entry point - return valid user object
@@ -30,16 +30,16 @@ class AuthorizeApiRequest
 
   # decode authentication token
   def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+    @decoded_auth_token ||= JsonWebToken.decode(@access_token)
   end
 
   # check for token in `Authorization` header
-  def http_auth_header
-    if headers['Authorization'].present?
-      return headers['Authorization'].split(' ').last
-    end
+  # def http_auth_header
+  #   if headers['Authorization'].present?
+  #     return headers['Authorization'].split(' ').last
+  #   end
 
-    raise(ExceptionHandler::MissingToken, Message.missing_token)
-  end
+  #   raise(ExceptionHandler::MissingToken, Message.missing_token)
+  # end
 end
 

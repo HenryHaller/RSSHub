@@ -4,28 +4,34 @@ class AuthenticationController < ApplicationController
   skip_before_action :authorize_request, only: %i[authenticate activate password_recovery_attempt password_recovery_request]
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-    json_response(auth_token: auth_token)
+    session[:access_token] = auth_token
+    json_response(nil)
   end
 
   def activate
     auth_token = ActivateUser.new(auth_params[:email], auth_params[:activation_token]).call
-    json_response(auth_token: auth_token)
+    session[:access_token] = auth_token
+    json_response(nil)
   end
 
   def password_recovery_request
-    response = PasswordRecoveryRequest.new(auth_params[:email]).call
-    json_response(response)
+    PasswordRecoveryRequest.new(auth_params[:email]).call
+    json_response(nil, 204)
   end
 
   def password_recovery_attempt
-    response = PasswordRecoveryAttempt.new(auth_params[:email], auth_params[:recovery_token], auth_params[:new_password]).call
-    json_response(response)
+    PasswordRecoveryAttempt.new(auth_params[:email], auth_params[:recovery_token], auth_params[:new_password]).call
+    json_response(nil, 204)
   end
 
   def update_password
-    # Rails.logger.warn(auth_params)
-    response = UpdatePassword.new(auth_params[:email], auth_params[:new_password], auth_params[:current_password]).call
-    json_response(response)
+    UpdatePassword.new(current_user, auth_params[:new_password], auth_params[:current_password]).call
+    json_response(nil, 204)
+  end
+
+  def log_out
+    reset_session
+    json_response(nil, 204)
   end
 
   private
