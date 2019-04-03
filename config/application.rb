@@ -16,9 +16,11 @@ module RSSHub
     # Initialize configuration defaults for originally generated Rails version.
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        # origins 'localhost:8080', 'rsshub-vue.firebaseapp.com', '[a-z0-9]+.ngrok.io'
-        # origins "*"
-        origins 'localhost:8080', 'rsshub.online'
+        if Rails.env.production?
+          origins 'rsshub.online'
+        else
+          origins 'localhost:8080', /https:\/\/[a-zA-Z0-9]+.ngrok.io/
+        end
         resource '*', headers: :any, methods: [:get, :post, :options, :delete], credentials: true, expose: ['Set-cookie']
       end
     end
