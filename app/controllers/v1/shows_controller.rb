@@ -22,8 +22,11 @@ module V1
       json_response(nil, :created)
     end
 
+    skip_before_action :authorize_request, only: :show
     def show
-      json_response(@show)
+      page = params[:page]
+      @episodes = @show.episodes.order(pub_date: :desc).page(page)
+      json_response(@episodes)
     end
 
     def destroy

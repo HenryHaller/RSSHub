@@ -46,6 +46,8 @@ gem "rubocop", "~> 0.61.1", require: false
 
 gem 'feedjira' # hopefully tihs is a better feed parser than stdlib
 
+gem 'kaminari'
+
 group :development do
   gem "web-console", ">= 3.3.0"
 end
