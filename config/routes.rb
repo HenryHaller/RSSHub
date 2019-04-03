@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'auth/password_recovery_request', to: 'authentication#password_recovery_request'
   post 'auth/password_recovery_attempt', to: 'authentication#password_recovery_attempt'
   post 'auth/update_password', to: 'authentication#update_password'
+  get 'auth/check_login', to: 'authentication#check_login'
   delete 'auth/logout', to: 'authentication#log_out'
 
   scope module: :v1, constraints: ApiVersion.new('v1', true) do

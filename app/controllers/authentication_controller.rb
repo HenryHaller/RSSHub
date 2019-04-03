@@ -8,6 +8,10 @@ class AuthenticationController < ApplicationController
     json_response(nil)
   end
 
+  def check_login
+    json_response(nil, 204)
+  end
+
   def activate
     auth_token = ActivateUser.new(auth_params[:email], auth_params[:activation_token]).call
     session[:access_token] = auth_token
