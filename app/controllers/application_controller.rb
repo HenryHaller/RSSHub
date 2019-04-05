@@ -13,7 +13,11 @@ class ApplicationController < ActionController::API
 
   # Check for valid request token and return user
   def authorize_request
-    authorize = AuthorizeApiRequest.new(session[:access_token]).call
-    @current_user = authorize[:user]
+    if session[:access_token] == nil
+      json_response({ message: Message.missing_token }, 401)
+    else
+      authorize = AuthorizeApiRequest.new(session[:access_token]).call
+      @current_user = authorize[:user]
+    end
   end
 end
