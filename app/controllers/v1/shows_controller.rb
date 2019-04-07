@@ -19,7 +19,7 @@ module V1
       else
         current_user.shows << @show
       end
-      json_response(nil, :created)
+      json_response({episodesAdded: @show.episodes.count, showTitle: @show.title}, :created)
     end
 
     skip_before_action :authorize_request, only: :show
