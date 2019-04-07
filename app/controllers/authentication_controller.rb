@@ -1,7 +1,7 @@
 # app/controllers/authentication_controller.rb
 class AuthenticationController < ApplicationController
   # return auth token once user is authenticated
-  skip_before_action :authorize_request, only: %i[authenticate activate password_recovery_attempt password_recovery_request log_out]
+  skip_before_action :authorize_request, only: %i[authenticate activate password_recovery_attempt password_recovery_request log_out, check_login]
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
     session[:access_token] = auth_token
@@ -9,7 +9,21 @@ class AuthenticationController < ApplicationController
   end
 
   def check_login
-    json_response(nil, 204)
+    if session[:access_token] == nil
+      json_response({message: Message.missing_token}, 200)
+    else
+      decoded_auth_token = JsonWebToken.decode(session[:access_token])
+      if decoded_auth_token.key?(:user_id)
+        begin
+          user = User.find(decoded_auth_token[:user_id])
+          json_response(nil, 204)
+        rescue
+          json_response({message: "User not found."}, 200)
+        end
+      else
+        json_response({message: "No user id in access token"}, 200)
+      end
+    end
   end
 
   def activate
