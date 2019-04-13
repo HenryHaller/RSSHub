@@ -6,6 +6,7 @@ class Episode < ApplicationRecord
   def as_json(options)
     json = super
     json["show_title"] = show.title
+    json["show_img"] = show.show_img
     json
   end
 
