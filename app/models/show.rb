@@ -111,8 +111,13 @@ class Show < ApplicationRecord
     end
   end
 
+  def parser
+    index = Feedjira.parsers.index { |parser| parser == Feedjira::Parser::ITunesRSS }
+    Feedjira.parsers[index]
+  end
+
   def feed
-    feed = Feedjira::Feed.parse self.data
+    feed = parser.parse self.data
     Rails.logger.warn(
       "\n                          #{feed.title} is a #{feed.class} with #{feed.entries.count} items         \n"
     )
