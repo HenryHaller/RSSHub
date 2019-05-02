@@ -6,6 +6,8 @@ class Show < ApplicationRecord
   # after_create :set_self_metadata, :update_eipsodes
   has_many :episodes, dependent: :destroy
   has_and_belongs_to_many :users
+  has_many :notification_subscriptions, dependent: :destroy
+
 
   def episodes_from_newest_to_oldest(limit = nil)
     episodes = self.episodes.order(pub_date: :desc)

@@ -6,6 +6,7 @@ module CustomSerializers
 
   def show_serializer(show)
     basic = basic_serializer(show)
+    basic["notifications"] = show.notification_subscriptions.find_by(user: current_user).subscribed
     { title: show.title, show_img: show.show_img }.merge(basic)
   end
 end

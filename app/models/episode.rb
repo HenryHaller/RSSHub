@@ -14,15 +14,16 @@ class Episode < ApplicationRecord
     notification = {}
     notification["title"] = "New Episode of #{self.show.title}"
     notification["body"] = "#{self.title}"
-    notification["loc"] = "/show/#{self.show.id}"
+    notification["loc"] = "show/#{self.show.id}"
+    # notification["loc"] = "episodes"
     notification["icon"] = './img/icons/android-chrome-192x192.png'
     notification["actions"] = [{ action: 'go', title: 'See new Episode!' }]
     notification
   end
 
-  def update_subscribers 
-    self.show.users.each do |user|
-      user.subscriptions.each { |subscription| subscription.push(notification)}
+  def update_subscribers
+    self.show.notification_subscriptions.where(subscribed: true).each do |su|
+      su.user.subscriptions.each { |subscription| subscription.push(notification)}
     end
   end
 

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :shows, only: %i[index show new create destroy]
     resources :episodes, only: [:index]
     resources :subscriptions, only: [:create]
+    patch '/notification_subscriptions/', to: "notification_subscriptions#update"
+    # resources :notification_subscriptions, only: [:update]
   end
   scope :admin do
     get 'panel', to: 'admin#panel'

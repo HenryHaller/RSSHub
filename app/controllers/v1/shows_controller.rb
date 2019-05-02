@@ -19,6 +19,7 @@ module V1
       else
         current_user.shows << @show
       end
+      NotificationSubscription.create(user: current_user, show: @show)
       json_response({episodesAdded: @show.episodes.count, showTitle: @show.title}, :created)
     end
 

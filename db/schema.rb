@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_123727) do
+ActiveRecord::Schema.define(version: 2019_05_02_035429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2019_05_01_123727) do
     t.index ["identity"], name: "index_login_activities_on_identity"
     t.index ["ip"], name: "index_login_activities_on_ip"
     t.index ["user_type", "user_id"], name: "index_login_activities_on_user_type_and_user_id"
+  end
+
+  create_table "notification_subscriptions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "show_id"
+    t.boolean "subscribed", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["show_id"], name: "index_notification_subscriptions_on_show_id"
+    t.index ["user_id"], name: "index_notification_subscriptions_on_user_id"
   end
 
   create_table "shows", force: :cascade do |t|
@@ -93,5 +103,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_123727) do
   end
 
   add_foreign_key "episodes", "shows"
+  add_foreign_key "notification_subscriptions", "shows"
+  add_foreign_key "notification_subscriptions", "users"
   add_foreign_key "subscriptions", "users"
 end

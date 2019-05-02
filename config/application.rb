@@ -21,7 +21,7 @@ module RSSHub
         else
           origins 'localhost:8080', /https:\/\/[a-zA-Z0-9]+.ngrok.io/
         end
-        resource '*', headers: :any, methods: [:get, :post, :options, :delete], credentials: true, expose: ['Set-cookie']
+        resource '*', headers: :any, methods: [:get, :post, :options, :delete, :patch], credentials: true, expose: ['Set-cookie']
       end
     end
 
