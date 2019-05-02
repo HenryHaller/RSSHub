@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   scope module: :v1, constraints: ApiVersion.new('v1', true) do
     resources :shows, only: %i[index show new create destroy]
     resources :episodes, only: [:index]
+    resources :subscriptions, only: [:create]
   end
   scope :admin do
     get 'panel', to: 'admin#panel'

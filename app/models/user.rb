@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_secure_password
   has_and_belongs_to_many :shows
   has_many :episodes, through: :shows
+  has_many :subscriptions
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

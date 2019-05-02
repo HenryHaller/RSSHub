@@ -10,6 +10,22 @@ class Episode < ApplicationRecord
     json
   end
 
+  def notification
+    notification = {}
+    notification["title"] = "New Episode of #{self.show.title}"
+    notification["body"] = "#{self.title}"
+    notification["loc"] = "/show/#{self.show.id}"
+    notification["icon"] = './img/icons/android-chrome-192x192.png'
+    notification["actions"] = [{ action: 'go', title: 'See new Episode!' }]
+    notification
+  end
+
+  def update_subscribers 
+    self.show.users.each do |user|
+      user.subscriptions.each { |subscription| subscription.push(notification)}
+    end
+  end
+
   def safe_title
     t = title
     t.tr!("'", "")
