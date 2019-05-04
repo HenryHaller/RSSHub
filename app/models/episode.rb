@@ -21,7 +21,7 @@ class Episode < ApplicationRecord
     notification
   end
 
-  def update_subscribers
+  def push
     self.show.notification_subscriptions.where(subscribed: true).each do |su|
       su.user.subscriptions.each { |subscription| subscription.push(notification)}
     end

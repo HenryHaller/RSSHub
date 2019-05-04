@@ -51,6 +51,7 @@ class Show < ApplicationRecord
     feed.entries.each do |episode|
       ep = make_episode(episode)
       if ep.save
+        ep.push
         show_updated = true
         # if first_run # if this us first run then we don't want to be sending out emails
         #   puts "first run is true"
