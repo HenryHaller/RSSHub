@@ -397,6 +397,7 @@ DEPENDENCIES
   redis
   rspec-rails (~> 3.8)
   rubocop (~> 0.61.1)
+  sassc
   sassc-rails
   selenium-webdriver
   sendgrid-actionmailer

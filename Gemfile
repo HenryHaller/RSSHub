@@ -26,6 +26,7 @@ gem "bcrypt"
 gem 'jwt'
 
 # gem "autoprefixer-rails"
+gem 'sassc'
 gem 'sassc-rails'
 # gem "simple_form"
 gem "uglifier"
