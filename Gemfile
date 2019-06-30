@@ -1,6 +1,6 @@
 source "https://rubygems.org"
-ruby "2.6.0"
-gem 'rails', '~> 6.0.0.beta1'
+ruby "2.6.3"
+gem 'rails', '~> 6.0.0.rc1'
 gem 'webpush'
 
 
@@ -26,10 +26,10 @@ gem "bcrypt"
 gem 'jwt'
 
 # gem "autoprefixer-rails"
-gem 'sassc-rails'
+# gem 'sassc-rails'
 # gem "simple_form"
-gem "uglifier"
-gem 'webpacker', '>= 4.0.0.rc.3'
+# gem "uglifier"
+# gem 'webpacker', '>= 4.0.0.rc.3'
 # gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
 
 # gem "csv"
@@ -64,7 +64,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "capybara"
   gem "selenium-webdriver"
-  gem "chromedriver-helper"
+  gem "webdrivers"
   gem "launchy"
   gem 'factory_bot_rails'
 end

@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.hosts << "5aff2803.ngrok.io"
+  config.hosts << "ff34d76a.ngrok.io"
   config.action_mailer.delivery_method = :sendgrid_actionmailer
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV['SENDGRID_API_KEY'],

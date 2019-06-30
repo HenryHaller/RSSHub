@@ -57,6 +57,7 @@ class Show < ApplicationRecord
         #   puts "first run is true"
         # end
       else
+        Rails.logger.warn(ep.errors.messages)
         # puts ep.errors.messages
         break # stop updating the shows table if one of the show saves fails
       end
