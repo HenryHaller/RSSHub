@@ -28,7 +28,7 @@ gem 'jwt'
 # gem "autoprefixer-rails"
 # gem 'sassc-rails'
 # gem "simple_form"
-# gem "uglifier"
+gem "uglifier"
 gem 'webpacker', '>= 4.0.0.rc.3'
 # gem "jquery-rails" # Add this line if you use Rails 5.1 or higher
 
